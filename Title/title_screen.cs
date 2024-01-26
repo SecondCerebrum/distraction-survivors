@@ -26,6 +26,13 @@ public partial class title_screen : Control
 		_coin2.Play();
 	}
 
+	private void _on_btn_play_click_end()
+	{
+		var level = "res://World/World.tscn";
+		var _level = GetTree().ChangeSceneToFile(level);
+	}
+
+
 	private void _on_exit_pressed()
 	{
 		GetTree().Quit();
