@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ravd6n4w4hta"]
+[gd_scene load_steps=20 format=3 uid="uid://ravd6n4w4hta"]
 
 [ext_resource type="Script" path="res://Title/title_screen.cs" id="1_1gvhq"]
 [ext_resource type="Texture2D" uid="uid://uhxxns0cxbap" path="res://Title/wp3637977-2037274431.jpg" id="1_uknaa"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://0gpl5pdaap4r" path="res://Images/coin/frame_07_delay-0.08s.png" id="12_xwpgt"]
 [ext_resource type="Texture2D" uid="uid://khdt7n5dwsm5" path="res://Images/coin/frame_08_delay-0.08s.png" id="13_8ewdf"]
 [ext_resource type="Texture2D" uid="uid://cpehe7ifwed5k" path="res://Images/coin/frame_09_delay-0.08s.png" id="14_223w1"]
+[ext_resource type="AudioStream" uid="uid://cb56kg1wwnswe" path="res://Voices/where_are_you_going.mp3" id="16_ukjvb"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7eudb"]
 animations = [{
@@ -138,6 +139,9 @@ theme_override_fonts/font = ExtResource("3_tcakm")
 theme_override_font_sizes/font_size = 60
 text = "Exit"
 
+[node name="WhereAreYouGoing" type="AudioStreamPlayer" parent="Exit"]
+stream = ExtResource("16_ukjvb")
+
 [node name="PopupMask" type="ColorRect" parent="."]
 visible = false
 layout_mode = 1
@@ -180,8 +184,46 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_tcakm")
 theme_override_font_sizes/font_size = 56
 theme_override_styles/normal = SubResource("StyleBoxFlat_ch4kg")
-text = "No, I'm ready!"
+text = "Just run the game!"
+
+[node name="ExitWindow" type="Window" parent="."]
+title = "Not so fast"
+initial_position = 2
+size = Vector2i(700, 200)
+visible = false
+exclusive = true
+unresizable = true
+popup_window = true
+
+[node name="CenterContainer" type="CenterContainer" parent="ExitWindow"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ExitWindow/CenterContainer"]
+layout_mode = 2
+
+[node name="DLC" type="Button" parent="ExitWindow/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tcakm")
+theme_override_font_sizes/font_size = 56
+theme_override_styles/normal = SubResource("StyleBoxFlat_i0kq7")
+text = "Exit to DLC store"
+
+[node name="Exit" type="Button" parent="ExitWindow/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(650, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tcakm")
+theme_override_font_sizes/font_size = 56
+theme_override_styles/normal = SubResource("StyleBoxFlat_ch4kg")
+text = "Just get out of there"
 
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="Window/CenterContainer/MarginContainer/VBoxContainer/Ready" to="." method="_on_btn_play_click_end"]
+[connection signal="close_requested" from="ReadyWindow" to="." method="_on_ready_popup_close"]
+[connection signal="pressed" from="ReadyWindow/CenterContainer/VBoxContainer/Ready" to="." method="_on_btn_play_click_end"]
+[connection signal="close_requested" from="ExitWindow" to="." method="_on_exit_popup_close"]
+[connection signal="pressed" from="ExitWindow/CenterContainer/VBoxContainer/Exit" to="." method="_on_exit"]
