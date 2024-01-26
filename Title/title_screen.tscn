@@ -1,8 +1,57 @@
-[gd_scene load_steps=4 format=3 uid="uid://ravd6n4w4hta"]
+[gd_scene load_steps=16 format=3 uid="uid://ravd6n4w4hta"]
 
+[ext_resource type="Script" path="res://Title/title_screen.cs" id="1_1gvhq"]
 [ext_resource type="Texture2D" uid="uid://uhxxns0cxbap" path="res://Title/wp3637977-2037274431.jpg" id="1_uknaa"]
 [ext_resource type="FontFile" uid="uid://lgkxvybdpf4" path="res://Fonts/Creepster-Regular.ttf" id="2_s2o4o"]
 [ext_resource type="FontFile" uid="uid://dwsf88cq5dfmu" path="res://Fonts/Rye-Regular.ttf" id="3_tcakm"]
+[ext_resource type="Texture2D" uid="uid://dlqnl7svaume5" path="res://Images/coin/frame_00_delay-0.08s.png" id="5_w2i6m"]
+[ext_resource type="Texture2D" uid="uid://bauvoehw74a0b" path="res://Images/coin/frame_01_delay-0.08s.png" id="6_jbcwv"]
+[ext_resource type="Texture2D" uid="uid://bxsnehf6v6je8" path="res://Images/coin/frame_02_delay-0.08s.png" id="7_xkdk2"]
+[ext_resource type="Texture2D" uid="uid://brm8b32od1rj8" path="res://Images/coin/frame_03_delay-0.08s.png" id="8_km5jn"]
+[ext_resource type="Texture2D" uid="uid://c71dhr7pm4vw8" path="res://Images/coin/frame_04_delay-0.08s.png" id="9_dklkx"]
+[ext_resource type="Texture2D" uid="uid://canaqap3bjxlb" path="res://Images/coin/frame_05_delay-0.08s.png" id="10_0p1ps"]
+[ext_resource type="Texture2D" uid="uid://cbwynawi7qeoc" path="res://Images/coin/frame_06_delay-0.08s.png" id="11_bgu0t"]
+[ext_resource type="Texture2D" uid="uid://0gpl5pdaap4r" path="res://Images/coin/frame_07_delay-0.08s.png" id="12_xwpgt"]
+[ext_resource type="Texture2D" uid="uid://khdt7n5dwsm5" path="res://Images/coin/frame_08_delay-0.08s.png" id="13_8ewdf"]
+[ext_resource type="Texture2D" uid="uid://cpehe7ifwed5k" path="res://Images/coin/frame_09_delay-0.08s.png" id="14_223w1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7eudb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_w2i6m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_jbcwv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_xkdk2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_km5jn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_dklkx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_0p1ps")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_bgu0t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_xwpgt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_8ewdf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_223w1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -11,6 +60,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_1gvhq")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
@@ -43,7 +93,29 @@ theme_override_fonts/font = ExtResource("3_tcakm")
 theme_override_font_sizes/font_size = 60
 text = "Play"
 
-[node name="Play2" type="Button" parent="."]
+[node name="DLC" type="Button" parent="."]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 326.0
+offset_right = 940.0
+offset_bottom = 485.0
+theme_override_fonts/font = ExtResource("3_tcakm")
+theme_override_font_sizes/font_size = 120
+text = "DLC"
+
+[node name="Coin1" type="AnimatedSprite2D" parent="DLC"]
+position = Vector2(81, 81)
+scale = Vector2(0.59, 0.59)
+sprite_frames = SubResource("SpriteFrames_7eudb")
+frame_progress = 0.656039
+
+[node name="Coin2" type="AnimatedSprite2D" parent="DLC"]
+position = Vector2(637, 81)
+scale = Vector2(0.59, 0.59)
+sprite_frames = SubResource("SpriteFrames_7eudb")
+frame_progress = 0.973393
+
+[node name="Exit" type="Button" parent="."]
 layout_mode = 0
 offset_left = 314.0
 offset_top = 516.0
@@ -53,12 +125,31 @@ theme_override_fonts/font = ExtResource("3_tcakm")
 theme_override_font_sizes/font_size = 60
 text = "Exit"
 
-[node name="Play3" type="Button" parent="."]
-layout_mode = 0
-offset_left = 220.0
-offset_top = 326.0
-offset_right = 940.0
-offset_bottom = 485.0
+[node name="Window" type="Window" parent="."]
+title = "Forgot something?"
+initial_position = 2
+size = Vector2i(600, 200)
+
+[node name="CenterContainer" type="CenterContainer" parent="Window"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Window/CenterContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Window/CenterContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="DLC" type="Button" parent="Window/CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("3_tcakm")
-theme_override_font_sizes/font_size = 120
-text = "DLC"
+theme_override_font_sizes/font_size = 56
+text = "Yes, some DLCs"
+
+[node name="Ready" type="Button" parent="Window/CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_tcakm")
+theme_override_font_sizes/font_size = 56
+text = "No, I'm ready!"
+
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
