@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://ravd6n4w4hta"]
+
+[ext_resource type="Texture2D" uid="uid://uhxxns0cxbap" path="res://Title/wp3637977-2037274431.jpg" id="1_uknaa"]
+[ext_resource type="FontFile" uid="uid://lgkxvybdpf4" path="res://Fonts/Creepster-Regular.ttf" id="2_s2o4o"]
+[ext_resource type="FontFile" uid="uid://dwsf88cq5dfmu" path="res://Fonts/Rye-Regular.ttf" id="3_tcakm"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = -371.0
+offset_right = 1152.0
+offset_bottom = 653.0
+texture = ExtResource("1_uknaa")
+expand_mode = 1
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_top = 26.0
+offset_right = 1152.0
+offset_bottom = 164.0
+theme_override_colors/font_color = Color(0.682353, 0.117647, 0.137255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("2_s2o4o")
+theme_override_font_sizes/font_size = 117
+text = "Distraction Survivors"
+horizontal_alignment = 1
+
+[node name="Play" type="Button" parent="."]
+layout_mode = 0
+offset_left = 314.0
+offset_top = 214.0
+offset_right = 846.0
+offset_bottom = 303.0
+theme_override_fonts/font = ExtResource("3_tcakm")
+theme_override_font_sizes/font_size = 60
+text = "Play"
+
+[node name="Play2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 314.0
+offset_top = 516.0
+offset_right = 846.0
+offset_bottom = 605.0
+theme_override_fonts/font = ExtResource("3_tcakm")
+theme_override_font_sizes/font_size = 60
+text = "Exit"
+
+[node name="Play3" type="Button" parent="."]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 326.0
+offset_right = 940.0
+offset_bottom = 485.0
+theme_override_fonts/font = ExtResource("3_tcakm")
+theme_override_font_sizes/font_size = 120
+text = "DLC"
