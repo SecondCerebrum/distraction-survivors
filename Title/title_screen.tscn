@@ -153,3 +153,4 @@ theme_override_font_sizes/font_size = 56
 text = "No, I'm ready!"
 
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Window/CenterContainer/MarginContainer/VBoxContainer/Ready" to="." method="_on_btn_play_click_end"]
