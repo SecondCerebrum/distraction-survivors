@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://b53owe838mdyn"
-path="res://.godot/imported/cha-ching.wav-a0962b7a5f3adc7610c89090ab02587f.sample"
+path="res://.godot/imported/cha-ching.wav-d28718d76d947aee63858c56ce637ff1.sample"
 
 [deps]
 
-source_file="res://Sounds/cha-ching.wav"
-dest_files=["res://.godot/imported/cha-ching.wav-a0962b7a5f3adc7610c89090ab02587f.sample"]
+source_file="res://Store/cha-ching.wav"
+dest_files=["res://.godot/imported/cha-ching.wav-d28718d76d947aee63858c56ce637ff1.sample"]
 
 [params]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://ds3xp2ka5yxp"]
+[gd_scene load_steps=27 format=3 uid="uid://ds3xp2ka5yxp"]
 
 [ext_resource type="Script" path="res://Store/store.cs" id="1_hngsw"]
 [ext_resource type="Texture2D" uid="uid://b71hx2hljblx2" path="res://Images/premium_wall.jpg" id="2_8luey"]
@@ -18,7 +18,6 @@
 [ext_resource type="Texture2D" uid="uid://753sru74cjdc" path="res://Images/diamond/frame_2_delay-0.25s.png" id="16_eat0l"]
 [ext_resource type="Texture2D" uid="uid://0kl8mrcxd80e" path="res://Images/diamond/frame_3_delay-0.25s.png" id="17_xkl2r"]
 [ext_resource type="AudioStream" uid="uid://bkvcqhqu8qu0u" path="res://Sounds/money_drop.wav" id="18_vbdh8"]
-[ext_resource type="AudioStream" uid="uid://b53owe838mdyn" path="res://Sounds/cha-ching.wav" id="19_2krpf"]
 [ext_resource type="AudioStream" uid="uid://t80hocb4hv8v" path="res://Voices/payment.wav" id="20_40oog"]
 [ext_resource type="Texture2D" uid="uid://c3lxffj0dnsr0" path="res://Images/terminal.png" id="20_yxotj"]
 [ext_resource type="AudioStream" uid="uid://bg87hcipovive" path="res://Voices/your_loss.wav" id="21_3yntx"]
@@ -333,9 +332,6 @@ layout_mode = 2
 
 [node name="OpenStoreSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("18_vbdh8")
-
-[node name="BuySound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("19_2krpf")
 
 [node name="Payment" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("20_40oog")
