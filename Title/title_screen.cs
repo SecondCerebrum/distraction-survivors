@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class title_screen : Control
 {
@@ -10,8 +9,10 @@ public partial class title_screen : Control
 	private AudioStreamPlayer _giveUsMoney;
 	private AudioStreamPlayer _whereAreYouGoing;
 	private AudioStreamPlayer _btnHoverSound;
-	private AudioStreamPlayback _btnHoverSoundPlayback;
+	private AudioStreamPlayer _noSavesToLoad;
 	private ColorRect _popupMask;
+	private Button _loadButton;
+	private FileDialog _fileDialog;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -23,15 +24,31 @@ public partial class title_screen : Control
 		_giveUsMoney = GetNode<AudioStreamPlayer>("Play/GiveUsMoney");
 		_whereAreYouGoing = GetNode<AudioStreamPlayer>("Exit/WhereAreYouGoing");
 		_btnHoverSound = GetNode<AudioStreamPlayer>("BtnHoverSound");
-		_btnHoverSoundPlayback = _btnHoverSound.GetStreamPlayback();
+		_noSavesToLoad = GetNode<AudioStreamPlayer>("Load/NoSavesToLoad");
 		_popupMask = GetNode<ColorRect>("PopupMask");
+		_loadButton = GetNode<Button>("Load");
+		_fileDialog = GetNode<FileDialog>("FileDialog");
+
+		if (GameState.Bought.Contains(SkillItemName.LordSaveUs))
+		{
+			_loadButton.Text = "Save";
+			GetNode<Sprite2D>("Load/Sprite2D").Hide();
+			GetNode<Sprite2D>("Load/Sprite2D2").Hide();
+		}
+
+		_coin1.Play();
+		_coin2.Play();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		_coin1.Play();
-		_coin2.Play();
+		if (GameState.Bought.Contains(SkillItemName.LordSaveUs))
+		{
+			_loadButton.Text = "Save";
+			GetNode<Sprite2D>("Load/Sprite2D").Hide();
+			GetNode<Sprite2D>("Load/Sprite2D2").Hide();
+		}
 	}
 
 	private void _on_btn_play_click_end()
@@ -83,5 +100,44 @@ public partial class title_screen : Control
 	private void _on_btn_hover()
 	{
 		_btnHoverSound.Play();
+	}
+
+	private void _on_load_btn()
+	{
+		if (GameState.Bought.Contains(SkillItemName.LordSaveUs))
+		{
+			_fileDialog.FileMode = FileDialog.FileModeEnum.SaveFile;
+			_fileDialog.Filters = new string[] {"*.sav ; Save game"};
+			_fileDialog.PopupCentered();
+		}
+		else _noSavesToLoad.Play();
+	}
+
+	private void _on_dialog_save(string path)
+	{
+		using (var file = FileAccess.Open(path, FileAccess.ModeFlags.Write))
+		{
+			file.StoreString(@"░░░░░░░░░▄░░░░░░░░░░░░░░▄░░░░
+░░░░░░░░▌▒█░░░░░░░░░░░▄▀▒▌░░░
+░░░░░░░░▌▒▒█░░░░░░░░▄▀▒▒▒▐░░░
+░░░░░░░▐▄▀▒▒▀▀▀▀▄▄▄▀▒▒▒▒▒▐░░░
+░░░░░▄▄▀▒░▒▒▒▒▒▒▒▒▒█▒▒▄█▒▐░░░
+░░░▄▀▒▒▒░░░▒▒▒░░░▒▒▒▀██▀▒▌░░░
+░░▐▒▒▒▄▄▒▒▒▒░░░▒▒▒▒▒▒▒▀▄▒▒▌░░
+░░▌░░▌█▀▒▒▒▒▒▄▀█▄▒▒▒▒▒▒▒█▒▐░░
+░▐░░░▒▒▒▒▒▒▒▒▌██▀▒▒░░░▒▒▒▀▄▌░
+░▌░▒▄██▄▒▒▒▒▒▒▒▒▒░░░░░░▒▒▒▒▌░
+▐▒▀▐▄█▄█▌▄░▀▒▒░░░░░░░░░░▒▒▒▐░
+▐▒▒▐▀▐▀▒░▄▄▒▄▒▒▒▒▒▒░▒░▒░▒▒▒▒▌
+▐▒▒▒▀▀▄▄▒▒▒▄▒▒▒▒▒▒▒▒░▒░▒░▒▒▐░
+░▌▒▒▒▒▒▒▀▀▀▒▒▒▒▒▒░▒░▒░▒░▒▒▒▌░
+░▐▒▒▒▒▒▒▒▒▒▒▒▒▒▒░▒░▒░▒▒▄▒▒▐░░
+░░▀▄▒▒▒▒▒▒▒▒▒▒▒░▒░▒░▒▄▒▒▒▒▌░░
+░░░░▀▄▒▒▒▒▒▒▒▒▒▒▄▄▄▀▒▒▒▒▄▀░░░
+░░░░░░▀▄▄▄▄▄▄▀▀▀▒▒▒▒▒▄▄▀░░░░░
+░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▀▀░░░░░░░░
+
+You have been doged!");
+		}
 	}
 }

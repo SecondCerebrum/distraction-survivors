@@ -15,6 +15,18 @@ public static class SkillList
 				Texture = "res://Images/skills/pause.jpg",
 				Description = "It would be nice to pause the game while looking at the Store."
 			},
+			new StoreItemData {
+				ID = SkillItemName.GloriousAchievements,
+				Title = "Glorious Achievements",
+				Texture = "res://Images/items/cup.jpg",
+				Description = "Achievement notifcations are shown for longer to be admire more."
+			},
+			new StoreItemData {
+				ID = SkillItemName.LordSaveUs,
+				Title = "Lord save us!",
+				Texture = "res://Images/items/save.jpg",
+				Description = "Your progress may be saved, but not loaded."
+			},
 		};
 	}
 }

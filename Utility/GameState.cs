@@ -12,6 +12,8 @@ public enum SkillItemName
 	// Skills
 	CoinCollector,
 	ActivePause,
+	GloriousAchievements,
+	LordSaveUs,
 
 	// Items
 	Banhammer,
