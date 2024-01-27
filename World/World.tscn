@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dbyqkxsc23oss"]
+[gd_scene load_steps=21 format=3 uid="uid://dbyqkxsc23oss"]
 
 [ext_resource type="Texture2D" uid="uid://bymw84uh1ihmj" path="res://World/Background/TilesetFloor.png" id="1_ggooo"]
 [ext_resource type="Script" path="res://World/World.cs" id="1_si70w"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://0gpl5pdaap4r" path="res://Images/coin/frame_07_delay-0.08s.png" id="13_dy386"]
 [ext_resource type="Texture2D" uid="uid://khdt7n5dwsm5" path="res://Images/coin/frame_08_delay-0.08s.png" id="14_g65t5"]
 [ext_resource type="Texture2D" uid="uid://cpehe7ifwed5k" path="res://Images/coin/frame_09_delay-0.08s.png" id="15_0fgra"]
+[ext_resource type="PackedScene" uid="uid://ftnyxg4wg4tn" path="res://World/Components/Achievement.tscn" id="18_t7dvg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wtqea"]
 atlas = ExtResource("1_ggooo")
@@ -123,6 +124,19 @@ visible = false
 
 [node name="CollectCoinsWindow" parent="." instance=ExtResource("6_qxim1")]
 visible = false
+
+[node name="Achievement" parent="." instance=ExtResource("18_t7dvg")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 247.0
+offset_top = 649.0
+offset_right = 247.0
+offset_bottom = 649.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_back_to_menu"]
 [connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_store_enter"]

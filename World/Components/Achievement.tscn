@@ -1,0 +1,91 @@
+[gd_scene load_steps=8 format=3 uid="uid://ftnyxg4wg4tn"]
+
+[ext_resource type="Script" path="res://World/Components/Achievement.cs" id="1_g25i5"]
+[ext_resource type="Texture2D" uid="uid://d1lnyxyij11a1" path="res://World/Components/achievement_banner.png" id="1_r1n6g"]
+[ext_resource type="FontFile" uid="uid://dwsf88cq5dfmu" path="res://Fonts/Rye-Regular.ttf" id="2_gi4ku"]
+[ext_resource type="AudioStream" uid="uid://d14rh641dnrk" path="res://World/Components/archievement.mp3" id="4_xfw04"]
+
+[sub_resource type="Animation" id="Animation_xj6bf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-263, 6.10352e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_r5ujo"]
+resource_name = "achievement"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 2.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -300), Vector2(0, -300), Vector2(0, -800)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0tsho"]
+_data = {
+"RESET": SubResource("Animation_xj6bf"),
+"achievement": SubResource("Animation_r5ujo")
+}
+
+[node name="Achievement" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_g25i5")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = -263.0
+offset_top = 6.10352e-05
+offset_right = 1122.0
+offset_bottom = 300.001
+scale = Vector2(0.385, 0.385)
+texture = ExtResource("1_r1n6g")
+
+[node name="Header" type="Label" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -344.448
+offset_top = 28.5716
+offset_right = 562.55
+offset_bottom = 124.572
+theme_override_fonts/font = ExtResource("2_gi4ku")
+theme_override_font_sizes/font_size = 76
+text = "Achievement Unlocked"
+
+[node name="Title" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 348.0
+offset_top = 122.0
+offset_right = 1301.0
+offset_bottom = 281.0
+theme_override_fonts/font = ExtResource("2_gi4ku")
+theme_override_font_sizes/font_size = 55
+text = "You found this placeholder"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0tsho")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_xfw04")

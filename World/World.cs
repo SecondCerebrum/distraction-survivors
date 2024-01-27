@@ -8,6 +8,8 @@ public partial class World : Node2D
 	private Vector2 _viewportSize;
 	private Random _random;
 	private Label _coinsLbl;
+	private Achievement _achievement;
+	private Hero _hero;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -17,12 +19,23 @@ public partial class World : Node2D
 		_viewportSize = GetViewportRect().Size;
 		_random = new Random();
 		_coinsLbl = GetNode<Label>("CoinsLbl");
+		_achievement = GetNode<Achievement>("Achievement");
+		_hero = GetNode<Hero>("Hero");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		_coinsLbl.Text = "Coins: " + GameState.Coins.ToString("000");
+
+		GD.Print(_hero.Position);
+		if (!GameState.Achievements.Contains("bounds") && (
+			(_hero.Position.X < -20 || _hero.Position.X > GetViewportRect().Size.X+20) ||
+			(_hero.Position.Y < -20 || _hero.Position.Y > GetViewportRect().Size.Y+20)
+		)) {
+			GetNode<Achievement>("Achievement").Run("There are no bounds if you ask");
+			GameState.Achievements.Add("bounds");
+		}
 	}
 
 	private void _on_back_to_menu()
