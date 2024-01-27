@@ -9,6 +9,9 @@ public partial class store : Control
 	private HBoxContainer _itemList;
 	private HBoxContainer _skillList;
 	private AudioStreamPlayer _openStoreSound;
+	private AudioStreamPlayer _payment;
+	private AudioStreamPlayer _yourLoss;
+	private Window _terminalWindow;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -20,6 +23,10 @@ public partial class store : Control
 		_itemList = GetNode<HBoxContainer>("ScrollContainer/ItemList");
 		_skillList = GetNode<HBoxContainer>("ScrollContainer2/SkillList");
 		_openStoreSound = GetNode<AudioStreamPlayer>("OpenStoreSound");
+		_payment = GetNode<AudioStreamPlayer>("Payment");
+		_yourLoss = GetNode<AudioStreamPlayer>("YourLoss");
+		_terminalWindow = GetNode<Window>("TerminalWindow");
+
 		_openStoreSound.Play();
 
 		var storeItem = GD.Load<PackedScene>("res://Store/store_item.tscn");
@@ -92,5 +99,17 @@ public partial class store : Control
 	private void _on_back()
 	{
 		GetTree().Root.RemoveChild(this);
+	}
+
+	private void _on_buy_more()
+	{
+		_terminalWindow.Show();
+		_payment.Play();
+	}
+
+	private void _on_close_terminal()
+	{
+		_terminalWindow.Hide();
+		_yourLoss.Play();
 	}
 }

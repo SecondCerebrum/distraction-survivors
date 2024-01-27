@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ds3xp2ka5yxp"]
+[gd_scene load_steps=28 format=3 uid="uid://ds3xp2ka5yxp"]
 
 [ext_resource type="Script" path="res://Store/store.cs" id="1_hngsw"]
 [ext_resource type="Texture2D" uid="uid://b71hx2hljblx2" path="res://Images/premium_wall.jpg" id="2_8luey"]
@@ -19,6 +19,9 @@
 [ext_resource type="Texture2D" uid="uid://0kl8mrcxd80e" path="res://Images/diamond/frame_3_delay-0.25s.png" id="17_xkl2r"]
 [ext_resource type="AudioStream" uid="uid://bkvcqhqu8qu0u" path="res://Sounds/money_drop.wav" id="18_vbdh8"]
 [ext_resource type="AudioStream" uid="uid://b53owe838mdyn" path="res://Sounds/cha-ching.wav" id="19_2krpf"]
+[ext_resource type="AudioStream" uid="uid://t80hocb4hv8v" path="res://Voices/payment.wav" id="20_40oog"]
+[ext_resource type="Texture2D" uid="uid://c3lxffj0dnsr0" path="res://Images/terminal.png" id="20_yxotj"]
+[ext_resource type="AudioStream" uid="uid://bg87hcipovive" path="res://Voices/your_loss.wav" id="21_3yntx"]
 
 [sub_resource type="Animation" id="Animation_adhpi"]
 length = 0.001
@@ -235,7 +238,7 @@ text = "Back"
 
 [node name="Container" type="Container" parent="HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 3
 
 [node name="CoinsLbl" type="Label" parent="HBoxContainer"]
 layout_mode = 2
@@ -251,9 +254,8 @@ scale = Vector2(0.225, 0.225)
 sprite_frames = SubResource("SpriteFrames_ofuoh")
 
 [node name="Container2" type="Container" parent="HBoxContainer"]
-custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 3
 
 [node name="DiamondsLbl" type="Label" parent="HBoxContainer"]
 layout_mode = 2
@@ -267,6 +269,18 @@ text = "Diamonds: 000"
 position = Vector2(-32, 22)
 scale = Vector2(0.264286, 0.264286)
 sprite_frames = SubResource("SpriteFrames_q5fyn")
+
+[node name="Container3" type="Container" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BuyBtn" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_uq0ve")
+theme_override_font_sizes/font_size = 40
+text = "Buy more!"
 
 [node name="ItemsLbl" type="Label" parent="."]
 layout_mode = 1
@@ -323,4 +337,32 @@ stream = ExtResource("18_vbdh8")
 [node name="BuySound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("19_2krpf")
 
+[node name="Payment" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_40oog")
+volume_db = 10.0
+
+[node name="YourLoss" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_3yntx")
+volume_db = 10.0
+
+[node name="TerminalWindow" type="Window" parent="."]
+position = Vector2i(800, 60)
+size = Vector2i(300, 550)
+visible = false
+unresizable = true
+always_on_top = true
+transparent = true
+
+[node name="TextureRect" type="TextureRect" parent="TerminalWindow"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20_yxotj")
+expand_mode = 3
+stretch_mode = 5
+
 [connection signal="pressed" from="HBoxContainer/BackBtn" to="." method="_on_back"]
+[connection signal="pressed" from="HBoxContainer/BuyBtn" to="." method="_on_buy_more"]
+[connection signal="close_requested" from="TerminalWindow" to="." method="_on_close_terminal"]
