@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://ds3xp2ka5yxp"]
+[gd_scene load_steps=29 format=3 uid="uid://ds3xp2ka5yxp"]
 
 [ext_resource type="Script" path="res://Store/Store.cs" id="1_5d2jm"]
 [ext_resource type="Texture2D" uid="uid://b71hx2hljblx2" path="res://Images/premium_wall.jpg" id="2_l58bt"]
@@ -22,6 +22,7 @@
 [ext_resource type="AudioStream" uid="uid://t80hocb4hv8v" path="res://Voices/payment.wav" id="19_v8eqa"]
 [ext_resource type="AudioStream" uid="uid://bg87hcipovive" path="res://Voices/your_loss.wav" id="20_j7a80"]
 [ext_resource type="Texture2D" uid="uid://c3lxffj0dnsr0" path="res://Images/terminal.png" id="21_haeww"]
+[ext_resource type="AudioStream" uid="uid://cxsquqbe0my72" path="res://Voices/your_money_support.wav" id="22_h4r7m"]
 
 [sub_resource type="Animation" id="Animation_adhpi"]
 length = 0.001
@@ -190,6 +191,7 @@ animations = [{
 }]
 
 [node name="Store" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -343,6 +345,10 @@ volume_db = 10.0
 
 [node name="YourLoss" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("20_j7a80")
+volume_db = 10.0
+
+[node name="GoodCause" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("22_h4r7m")
 volume_db = 10.0
 
 [node name="TerminalWindow" type="Window" parent="."]

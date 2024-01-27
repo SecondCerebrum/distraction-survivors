@@ -1,6 +1,6 @@
 public class StoreItemData
 {
-	public string ID { get; set; }
+	public SkillItemName ID { get; set; }
 	public string Title { get; set; }
 	public string Texture { get; set; }
 	public string Description { get; set; }

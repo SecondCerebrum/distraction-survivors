@@ -33,4 +33,9 @@ public partial class SkillSelect : Window
 	{
 
 	}
+
+	private void _on_close_requested()
+	{
+		Hide();
+	}
 }

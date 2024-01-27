@@ -1,14 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://dbyqkxsc23oss"]
+[gd_scene load_steps=7 format=3 uid="uid://dbyqkxsc23oss"]
 
 [ext_resource type="Texture2D" uid="uid://bymw84uh1ihmj" path="res://World/Background/TilesetFloor.png" id="1_ggooo"]
+[ext_resource type="Script" path="res://World/World.cs" id="1_si70w"]
 [ext_resource type="PackedScene" uid="uid://cl4awbg1m6xqj" path="res://Hero/Hero.tscn" id="2_w3p0r"]
 [ext_resource type="PackedScene" uid="uid://cx1etwwkq8ylk" path="res://Enemy/EnemySpawner.tscn" id="4_jyvgn"]
+[ext_resource type="PackedScene" uid="uid://uvbtqi3fvjge" path="res://World/Components/SkillSelect.tscn" id="5_3j8d6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wtqea"]
 atlas = ExtResource("1_ggooo")
 region = Rect2(64, 0, 64, 64)
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_si70w")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_left = -3.0
@@ -22,3 +25,35 @@ position = Vector2(440, 263)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("4_jyvgn")]
 position = Vector2(-3, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 900.0
+offset_right = 981.0
+offset_bottom = 649.0
+
+[node name="Debug" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Debug"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "menu"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "store"
+
+[node name="Button3" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "skills"
+
+[node name="Button4" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "coins"
+
+[node name="SkillSelectWindow" parent="." instance=ExtResource("5_3j8d6")]
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_back_to_menu"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_store_enter"]
+[connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_skill_select"]

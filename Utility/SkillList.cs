@@ -4,13 +4,13 @@ public static class SkillList
 	{
 		return new StoreItemData[] {
 			new StoreItemData {
-				ID = "coincollector",
+				ID = SkillItemName.CoinCollector,
 				Title = "Coin Collector",
 				Texture = "res://Images/skills/coins.jpg",
 				Description = "Oh, you thought you can collect coins from the beggining? Fool!"
 			},
 			new StoreItemData {
-				ID = "activepause",
+				ID = SkillItemName.ActivePause,
 				Title = "Active Pause",
 				Texture = "res://Images/skills/pause.jpg",
 				Description = "It would be nice to pause the game while looking at the Store."

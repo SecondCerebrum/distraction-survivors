@@ -12,6 +12,7 @@ public partial class Store : Control
 	private AudioStreamPlayer _payment;
 	private AudioStreamPlayer _yourLoss;
 	private AudioStreamPlayer _terminalSound;
+	private AudioStreamPlayer _goodCause;
 	private Window _terminalWindow;
 	private Label _coinsLbl;
 	private Label _diamondsLbl;
@@ -30,6 +31,7 @@ public partial class Store : Control
 		_payment = GetNode<AudioStreamPlayer>("Payment");
 		_yourLoss = GetNode<AudioStreamPlayer>("YourLoss");
 		_terminalSound = GetNode<AudioStreamPlayer>("TerminalSound");
+		_goodCause = GetNode<AudioStreamPlayer>("GoodCause");
 		_terminalWindow = GetNode<Window>("TerminalWindow");
 		_coinsLbl = GetNode<Label>("HBoxContainer/CoinsLbl");
 		_diamondsLbl = GetNode<Label>("HBoxContainer/DiamondsLbl");
@@ -48,6 +50,7 @@ public partial class Store : Control
 			var label = newItem.GetNode<Label>("VBoxContainer/Label");
 
 			button.TextureNormal = ImageTexture.CreateFromImage(Image.LoadFromFile(item.Texture));
+			button.TooltipText = item.Description;
 			label.Text = item.Title;
 
 			_itemList.AddChild(newItem);
@@ -78,6 +81,7 @@ public partial class Store : Control
 
 	private void _on_back()
 	{
+		GetTree().Paused = false;
 		GetTree().Root.RemoveChild(this);
 	}
 
@@ -93,6 +97,7 @@ public partial class Store : Control
 		_terminalWindow.Hide();
 		_payment.Stop();
 		if (!_terminalUsed) _yourLoss.Play();
+		else _goodCause.Play();
 	}
 
 	private void _on_counters_update()

@@ -3,7 +3,7 @@ using System;
 
 public partial class StoreItem : MarginContainer
 {
-	[Export] public string ID { get; set; }
+	[Export] public SkillItemName ID { get; set; }
 	[Export] public bool Bought { get; set; }
 
 	private ColorRect _dim;
@@ -31,10 +31,11 @@ public partial class StoreItem : MarginContainer
 	{
 		_buySound.Play();
 		Bought = true;
-		if (ID is not null) GameState.Bought.Add(ID);
+		GameState.Bought.Add(ID);
 		_dim.Show();
 		_buy.Hide();
 		_bought.Show();
+		if (GameState.Bought.Contains(SkillItemName.ActivePause)) GetTree().Paused = true;
 	}
 
 	private void _on_hover()
