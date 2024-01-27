@@ -45,6 +45,7 @@ public partial class title_screen : Control
 		var storeScene = GD.Load<PackedScene>("res://Store/store.tscn");
 		GetTree().Root.AddChild(storeScene.Instantiate());
 		_readyWindow.Hide();
+		_exitWindow.Hide();
 		_popupMask.Hide();
 	}
 
