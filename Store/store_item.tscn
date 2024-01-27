@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://bq15m7np4a2hm"]
+[gd_scene load_steps=2 format=3 uid="uid://bq15m7np4a2hm"]
 
-[ext_resource type="Texture2D" uid="uid://eahw6nvhw0p1" path="res://Images/items/banhammer.jpg" id="1_p273j"]
 [ext_resource type="FontFile" uid="uid://dwsf88cq5dfmu" path="res://Fonts/Rye-Regular.ttf" id="2_3ecd1"]
 
 [node name="StoreItem" type="MarginContainer"]
@@ -12,7 +11,6 @@ theme_override_constants/margin_right = 10
 [node name="TextureButton" type="TextureButton" parent="."]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
-texture_normal = ExtResource("1_p273j")
 ignore_texture_size = true
 stretch_mode = 0
 
