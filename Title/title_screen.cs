@@ -9,6 +9,8 @@ public partial class title_screen : Control
 	private Window _exitWindow;
 	private AudioStreamPlayer _giveUsMoney;
 	private AudioStreamPlayer _whereAreYouGoing;
+	private AudioStreamPlayer _btnHoverSound;
+	private AudioStreamPlayback _btnHoverSoundPlayback;
 	private ColorRect _popupMask;
 
 	// Called when the node enters the scene tree for the first time.
@@ -20,6 +22,8 @@ public partial class title_screen : Control
 		_exitWindow = GetNode<Window>("ExitWindow");
 		_giveUsMoney = GetNode<AudioStreamPlayer>("Play/GiveUsMoney");
 		_whereAreYouGoing = GetNode<AudioStreamPlayer>("Exit/WhereAreYouGoing");
+		_btnHoverSound = GetNode<AudioStreamPlayer>("BtnHoverSound");
+		_btnHoverSoundPlayback = _btnHoverSound.GetStreamPlayback();
 		_popupMask = GetNode<ColorRect>("PopupMask");
 	}
 
@@ -65,5 +69,10 @@ public partial class title_screen : Control
 	{
 		_exitWindow.Hide();
 		_popupMask.Hide();
+	}
+
+	private void _on_btn_hover()
+	{
+		_btnHoverSound.Play();
 	}
 }

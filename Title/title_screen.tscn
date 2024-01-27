@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://ravd6n4w4hta"]
+[gd_scene load_steps=21 format=3 uid="uid://ravd6n4w4hta"]
 
 [ext_resource type="Script" path="res://Title/title_screen.cs" id="1_1gvhq"]
 [ext_resource type="Texture2D" uid="uid://uhxxns0cxbap" path="res://Title/wp3637977-2037274431.jpg" id="1_uknaa"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://khdt7n5dwsm5" path="res://Images/coin/frame_08_delay-0.08s.png" id="13_8ewdf"]
 [ext_resource type="Texture2D" uid="uid://cpehe7ifwed5k" path="res://Images/coin/frame_09_delay-0.08s.png" id="14_223w1"]
 [ext_resource type="AudioStream" uid="uid://cb56kg1wwnswe" path="res://Voices/where_are_you_going.mp3" id="16_ukjvb"]
+[ext_resource type="AudioStream" uid="uid://djgbrpooe01qf" path="res://Sounds/coin.wav" id="17_caogu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7eudb"]
 animations = [{
@@ -221,9 +222,19 @@ theme_override_font_sizes/font_size = 56
 theme_override_styles/normal = SubResource("StyleBoxFlat_ch4kg")
 text = "Just get out of there"
 
+[node name="BtnHoverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_caogu")
+
+[connection signal="mouse_entered" from="Play" to="." method="_on_btn_hover"]
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="mouse_entered" from="DLC" to="." method="_on_btn_hover"]
+[connection signal="mouse_entered" from="Exit" to="." method="_on_btn_hover"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
 [connection signal="close_requested" from="ReadyWindow" to="." method="_on_ready_popup_close"]
+[connection signal="mouse_entered" from="ReadyWindow/CenterContainer/VBoxContainer/DLC" to="." method="_on_btn_hover"]
+[connection signal="mouse_entered" from="ReadyWindow/CenterContainer/VBoxContainer/Ready" to="." method="_on_btn_hover"]
 [connection signal="pressed" from="ReadyWindow/CenterContainer/VBoxContainer/Ready" to="." method="_on_btn_play_click_end"]
 [connection signal="close_requested" from="ExitWindow" to="." method="_on_exit_popup_close"]
+[connection signal="mouse_entered" from="ExitWindow/CenterContainer/VBoxContainer/DLC" to="." method="_on_btn_hover"]
+[connection signal="mouse_entered" from="ExitWindow/CenterContainer/VBoxContainer/Exit" to="." method="_on_btn_hover"]
 [connection signal="pressed" from="ExitWindow/CenterContainer/VBoxContainer/Exit" to="." method="_on_exit"]
