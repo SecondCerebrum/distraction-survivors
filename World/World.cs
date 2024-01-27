@@ -4,16 +4,25 @@ using System;
 public partial class World : Node2D
 {
 	private SkillSelect _skillSelect;
+	private CollectCoinsWindow _collectCoinsWindow;
+	private Vector2 _viewportSize;
+	private Random _random;
+	private Label _coinsLbl;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_skillSelect = GetNode<SkillSelect>("SkillSelectWindow");
+		_collectCoinsWindow = GetNode<CollectCoinsWindow>("CollectCoinsWindow");
+		_viewportSize = GetViewportRect().Size;
+		_random = new Random();
+		_coinsLbl = GetNode<Label>("CoinsLbl");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		_coinsLbl.Text = "Coins: " + GameState.Coins.ToString("000");
 	}
 
 	private void _on_back_to_menu()
@@ -35,5 +44,17 @@ public partial class World : Node2D
 	private void _on_skill_select()
 	{
 		_skillSelect.Show();
+	}
+
+	private void _on_collect_popup()
+	{
+		Vector2I[] positions = {
+			new Vector2I(50, 70),
+			new Vector2I((int)_viewportSize.X - _collectCoinsWindow.Size.X - 50, 70),
+			new Vector2I(50, (int)_viewportSize.Y - _collectCoinsWindow.Size.Y - 50),
+			new Vector2I((int)_viewportSize.X - _collectCoinsWindow.Size.X - 50, (int)_viewportSize.Y - _collectCoinsWindow.Size.Y - 50),
+		};
+		_collectCoinsWindow.Position = positions[_random.Next(0, positions.Length)];
+		_collectCoinsWindow.Show();
 	}
 }

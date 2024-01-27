@@ -1,14 +1,64 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbyqkxsc23oss"]
+[gd_scene load_steps=20 format=3 uid="uid://dbyqkxsc23oss"]
 
 [ext_resource type="Texture2D" uid="uid://bymw84uh1ihmj" path="res://World/Background/TilesetFloor.png" id="1_ggooo"]
 [ext_resource type="Script" path="res://World/World.cs" id="1_si70w"]
 [ext_resource type="PackedScene" uid="uid://cl4awbg1m6xqj" path="res://Hero/Hero.tscn" id="2_w3p0r"]
 [ext_resource type="PackedScene" uid="uid://cx1etwwkq8ylk" path="res://Enemy/EnemySpawner.tscn" id="4_jyvgn"]
 [ext_resource type="PackedScene" uid="uid://uvbtqi3fvjge" path="res://World/Components/SkillSelect.tscn" id="5_3j8d6"]
+[ext_resource type="FontFile" uid="uid://dwsf88cq5dfmu" path="res://Fonts/Rye-Regular.ttf" id="5_yymnn"]
+[ext_resource type="Texture2D" uid="uid://dlqnl7svaume5" path="res://Images/coin/frame_00_delay-0.08s.png" id="6_1fuf6"]
+[ext_resource type="PackedScene" uid="uid://gxruecvgksyc" path="res://World/Components/CollectCoinsWindow.tscn" id="6_qxim1"]
+[ext_resource type="Texture2D" uid="uid://bauvoehw74a0b" path="res://Images/coin/frame_01_delay-0.08s.png" id="7_pkihg"]
+[ext_resource type="Texture2D" uid="uid://bxsnehf6v6je8" path="res://Images/coin/frame_02_delay-0.08s.png" id="8_t3wk5"]
+[ext_resource type="Texture2D" uid="uid://brm8b32od1rj8" path="res://Images/coin/frame_03_delay-0.08s.png" id="9_gvdlj"]
+[ext_resource type="Texture2D" uid="uid://c71dhr7pm4vw8" path="res://Images/coin/frame_04_delay-0.08s.png" id="10_qqkmu"]
+[ext_resource type="Texture2D" uid="uid://canaqap3bjxlb" path="res://Images/coin/frame_05_delay-0.08s.png" id="11_7hsvr"]
+[ext_resource type="Texture2D" uid="uid://cbwynawi7qeoc" path="res://Images/coin/frame_06_delay-0.08s.png" id="12_fbpwp"]
+[ext_resource type="Texture2D" uid="uid://0gpl5pdaap4r" path="res://Images/coin/frame_07_delay-0.08s.png" id="13_dy386"]
+[ext_resource type="Texture2D" uid="uid://khdt7n5dwsm5" path="res://Images/coin/frame_08_delay-0.08s.png" id="14_g65t5"]
+[ext_resource type="Texture2D" uid="uid://cpehe7ifwed5k" path="res://Images/coin/frame_09_delay-0.08s.png" id="15_0fgra"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wtqea"]
 atlas = ExtResource("1_ggooo")
 region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jic7j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_1fuf6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_pkihg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_t3wk5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_gvdlj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_qqkmu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_7hsvr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_fbpwp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_dy386")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_g65t5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_0fgra")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_si70w")
@@ -27,8 +77,8 @@ position = Vector2(440, 263)
 position = Vector2(-3, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_left = 900.0
-offset_right = 981.0
+offset_left = 1071.0
+offset_right = 1152.0
 offset_bottom = 649.0
 
 [node name="Debug" type="Label" parent="VBoxContainer"]
@@ -52,8 +102,29 @@ text = "skills"
 layout_mode = 2
 text = "coins"
 
+[node name="CoinsLbl" type="Label" parent="."]
+offset_left = 48.62
+offset_top = 3.315
+offset_right = 273.62
+offset_bottom = 54.315
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("5_yymnn")
+theme_override_font_sizes/font_size = 29
+text = "Coins: 000"
+
+[node name="Coin" type="AnimatedSprite2D" parent="CoinsLbl"]
+position = Vector2(-28.28, 18.61)
+scale = Vector2(0.164, 0.164)
+sprite_frames = SubResource("SpriteFrames_jic7j")
+
 [node name="SkillSelectWindow" parent="." instance=ExtResource("5_3j8d6")]
+visible = false
+
+[node name="CollectCoinsWindow" parent="." instance=ExtResource("6_qxim1")]
+visible = false
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_back_to_menu"]
 [connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_store_enter"]
 [connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_skill_select"]
+[connection signal="pressed" from="VBoxContainer/Button4" to="." method="_on_collect_popup"]

@@ -1,0 +1,96 @@
+[gd_scene load_steps=14 format=3 uid="uid://gxruecvgksyc"]
+
+[ext_resource type="Script" path="res://World/Components/CollectCoinsWindow.cs" id="1_crysq"]
+[ext_resource type="FontFile" uid="uid://dwsf88cq5dfmu" path="res://Fonts/Rye-Regular.ttf" id="1_k7trw"]
+[ext_resource type="Texture2D" uid="uid://dlqnl7svaume5" path="res://Images/coin/frame_00_delay-0.08s.png" id="3_iictf"]
+[ext_resource type="Texture2D" uid="uid://bauvoehw74a0b" path="res://Images/coin/frame_01_delay-0.08s.png" id="4_ecxdd"]
+[ext_resource type="Texture2D" uid="uid://bxsnehf6v6je8" path="res://Images/coin/frame_02_delay-0.08s.png" id="5_qfwfr"]
+[ext_resource type="Texture2D" uid="uid://brm8b32od1rj8" path="res://Images/coin/frame_03_delay-0.08s.png" id="6_n7res"]
+[ext_resource type="Texture2D" uid="uid://c71dhr7pm4vw8" path="res://Images/coin/frame_04_delay-0.08s.png" id="7_7dif6"]
+[ext_resource type="Texture2D" uid="uid://canaqap3bjxlb" path="res://Images/coin/frame_05_delay-0.08s.png" id="8_l7uac"]
+[ext_resource type="Texture2D" uid="uid://cbwynawi7qeoc" path="res://Images/coin/frame_06_delay-0.08s.png" id="9_wd3by"]
+[ext_resource type="Texture2D" uid="uid://0gpl5pdaap4r" path="res://Images/coin/frame_07_delay-0.08s.png" id="10_455s6"]
+[ext_resource type="Texture2D" uid="uid://khdt7n5dwsm5" path="res://Images/coin/frame_08_delay-0.08s.png" id="11_tj2fb"]
+[ext_resource type="Texture2D" uid="uid://cpehe7ifwed5k" path="res://Images/coin/frame_09_delay-0.08s.png" id="12_htb3l"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qqp1h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_iictf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ecxdd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qfwfr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_n7res")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_7dif6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_l7uac")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_wd3by")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_455s6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_tj2fb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_htb3l")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CollectCoinsWindow" type="Window"]
+position = Vector2i(11, 36)
+size = Vector2i(215, 65)
+script = ExtResource("1_crysq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("1_k7trw")
+theme_override_font_sizes/font_size = 18
+text = "Collect some coins!"
+
+[node name="Collect" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_k7trw")
+theme_override_font_sizes/font_size = 18
+text = "Collect"
+
+[node name="Coin1" type="AnimatedSprite2D" parent="VBoxContainer/Collect"]
+position = Vector2(20.49, 16.09)
+scale = Vector2(0.11, 0.11)
+sprite_frames = SubResource("SpriteFrames_qqp1h")
+speed_scale = 3.0
+
+[node name="Coin2" type="AnimatedSprite2D" parent="VBoxContainer/Collect"]
+position = Vector2(181.35, 16.09)
+scale = Vector2(0.11, 0.11)
+sprite_frames = SubResource("SpriteFrames_qqp1h")
+speed_scale = 3.0
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="VBoxContainer/Collect" to="." method="_on_collect"]
