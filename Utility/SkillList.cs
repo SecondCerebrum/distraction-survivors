@@ -23,9 +23,15 @@ public static class SkillList
 			},
 			new StoreItemData {
 				ID = SkillItemName.LordSaveUs,
-				Title = "Lord save us!",
+				Title = "Lord Save Us!",
 				Texture = "res://Images/items/save.jpg",
 				Description = "Your progress may be saved, but not loaded."
+			},
+			new StoreItemData {
+				ID = SkillItemName.CoinMagnet,
+				Title = "Plus Size",
+				Texture = "res://Images/skills/fat_man_coins.jpg",
+				Description = "You ate so much coins are pulled by your own gravity."
 			},
 		};
 	}
