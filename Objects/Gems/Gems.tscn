@@ -5,8 +5,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4tfp4"]
 
 [node name="Gems" type="Area2D"]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 8
+collision_mask = 8
 script = ExtResource("1_45l46")
 
 [node name="Sprite" type="Sprite2D" parent="."]

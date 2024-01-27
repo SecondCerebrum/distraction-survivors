@@ -9,6 +9,8 @@ public partial class Hero : CharacterBody2D
 	// public int Experience = 0;
 	// public int ExperienceLevel = 1;
 	public int Armor = 0;
+	private Area2D Collecting;
+	private Area2D Gathering;
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
@@ -31,13 +33,37 @@ public partial class Hero : CharacterBody2D
 	{
 		Sprite = GetNode<Sprite2D>("HeroSprite");
 		WalkTimer = GetNode<Timer>("WalkTimer");
-
+		Gathering = GetNode<Area2D>("Gathering");
+		Collecting = GetNode<Area2D>("Collecting");
 		// Hurt
 		// var HurtBox = GetTree().Root.GetNode<Area2D>("World/Hero/HurtBox2");
 		// var HurtBox = GetNode<Area2D>("HurtBox2");
 		// GD.Print("HurtBox", " ", HurtBox);
 		// HurtBox.Set("Hurt", OnHurt);
 		// HurtBox.Connect("Hurt", new Callable(this, nameof(OnHurt)));
+		// GD.Print("Gathering ", Gathering, " ", Gathering.GetGroups());
+		Gathering.Connect("area_entered", new Callable(this, nameof(OnGatheringAreaEntered)));
+		Collecting.Connect("area_entered", new Callable(this, nameof(OnCollectingAreaEntered)));
+	}
+
+	private void OnGatheringAreaEntered(Node area)
+	{
+		GD.Print(area);
+		if (area.IsInGroup("loot"))
+		{
+			GD.Print("OnGatheringAreaEntered", " ", area);
+			area.Set("Target", this);
+		}
+	}
+
+	private void OnCollectingAreaEntered(Node area)
+	{
+		GD.Print(area);
+		if (area.IsInGroup("loot"))
+		{
+			GD.Print("OnGatheringAreaEntered", " ", area);
+			area.Call("Collect");
+		}
 	}
 
 	public override void _PhysicsProcess(double delta)

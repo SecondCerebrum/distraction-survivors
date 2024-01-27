@@ -1,15 +1,15 @@
-using Godot;
 using System;
+using Godot;
 
 public partial class World : Node2D
 {
-	private SkillSelect _skillSelect;
-	private CollectCoinsWindow _collectCoinsWindow;
-	private Vector2 _viewportSize;
-	private Random _random;
-	private Label _coinsLbl;
 	private Achievement _achievement;
+	private Label _coinsLbl;
+	private CollectCoinsWindow _collectCoinsWindow;
 	private Hero _hero;
+	private Random _random;
+	private SkillSelect _skillSelect;
+	private Vector2 _viewportSize;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -28,11 +28,12 @@ public partial class World : Node2D
 	{
 		_coinsLbl.Text = "Coins: " + GameState.Coins.ToString("000");
 
-		GD.Print(_hero.Position);
+		// GD.Print(_hero.Position);
 		if (!GameState.Achievements.Contains("bounds") && (
-			(_hero.Position.X < -20 || _hero.Position.X > GetViewportRect().Size.X+20) ||
-			(_hero.Position.Y < -20 || _hero.Position.Y > GetViewportRect().Size.Y+20)
-		)) {
+				_hero.Position.X < -20 || _hero.Position.X > GetViewportRect().Size.X + 20 ||
+				_hero.Position.Y < -20 || _hero.Position.Y > GetViewportRect().Size.Y + 20
+			))
+		{
 			GetNode<Achievement>("Achievement").Run("There are no bounds if you ask");
 			GameState.Achievements.Add("bounds");
 		}
@@ -61,11 +62,13 @@ public partial class World : Node2D
 
 	private void _on_collect_popup()
 	{
-		Vector2I[] positions = {
-			new Vector2I(50, 70),
-			new Vector2I((int)_viewportSize.X - _collectCoinsWindow.Size.X - 50, 70),
-			new Vector2I(50, (int)_viewportSize.Y - _collectCoinsWindow.Size.Y - 50),
-			new Vector2I((int)_viewportSize.X - _collectCoinsWindow.Size.X - 50, (int)_viewportSize.Y - _collectCoinsWindow.Size.Y - 50),
+		Vector2I[] positions =
+		{
+			new(50, 70),
+			new((int)_viewportSize.X - _collectCoinsWindow.Size.X - 50, 70),
+			new(50, (int)_viewportSize.Y - _collectCoinsWindow.Size.Y - 50),
+			new((int)_viewportSize.X - _collectCoinsWindow.Size.X - 50,
+				(int)_viewportSize.Y - _collectCoinsWindow.Size.Y - 50)
 		};
 		_collectCoinsWindow.Position = positions[_random.Next(0, positions.Length)];
 		_collectCoinsWindow.Show();

@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://uvbtqi3fvjge" path="res://World/Components/SkillSelect.tscn" id="5_3j8d6"]
 [ext_resource type="FontFile" uid="uid://dwsf88cq5dfmu" path="res://Fonts/Rye-Regular.ttf" id="5_yymnn"]
 [ext_resource type="Texture2D" uid="uid://dlqnl7svaume5" path="res://Images/coin/frame_00_delay-0.08s.png" id="6_1fuf6"]
-[ext_resource type="PackedScene" uid="uid://gxruecvgksyc" path="res://World/Components/CollectCoinsWindow.tscn" id="6_qxim1"]
+[ext_resource type="PackedScene" path="res://World/Components/CollectCoinsWindow.tscn" id="6_qxim1"]
 [ext_resource type="Texture2D" uid="uid://bauvoehw74a0b" path="res://Images/coin/frame_01_delay-0.08s.png" id="7_pkihg"]
 [ext_resource type="Texture2D" uid="uid://bxsnehf6v6je8" path="res://Images/coin/frame_02_delay-0.08s.png" id="8_t3wk5"]
 [ext_resource type="Texture2D" uid="uid://brm8b32od1rj8" path="res://Images/coin/frame_03_delay-0.08s.png" id="9_gvdlj"]
@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://0gpl5pdaap4r" path="res://Images/coin/frame_07_delay-0.08s.png" id="13_dy386"]
 [ext_resource type="Texture2D" uid="uid://khdt7n5dwsm5" path="res://Images/coin/frame_08_delay-0.08s.png" id="14_g65t5"]
 [ext_resource type="Texture2D" uid="uid://cpehe7ifwed5k" path="res://Images/coin/frame_09_delay-0.08s.png" id="15_0fgra"]
-[ext_resource type="PackedScene" uid="uid://ftnyxg4wg4tn" path="res://World/Components/Achievement.tscn" id="18_t7dvg"]
+[ext_resource type="PackedScene" path="res://World/Components/Achievement.tscn" id="18_t7dvg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wtqea"]
 atlas = ExtResource("1_ggooo")
@@ -72,7 +72,7 @@ texture = SubResource("AtlasTexture_wtqea")
 stretch_mode = 1
 
 [node name="Hero" parent="." instance=ExtResource("2_w3p0r")]
-position = Vector2(440, 263)
+position = Vector2(504, 283)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("4_jyvgn")]
 position = Vector2(-3, 1)
