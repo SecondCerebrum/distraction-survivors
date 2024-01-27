@@ -1,47 +1,42 @@
-using Godot;
 using System;
 using System.Collections.Generic;
-using Godot.Collections;
-
+using Godot;
 
 public partial class EnemySpawner : Node2D
 {
-	public List<SpawnInfo> Spawns = new List<SpawnInfo>();
-	[Export] public int Time = 0;
-	public CharacterBody2D Hero;
-	private Timer _timer; 
-	
+	private readonly List<SpawnInfo> _spawns = new();
+	private CharacterBody2D _hero;
+	private int _time;
+	private Timer _timer;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		//Hero = GetTree().GetFirstNodeInGroup("Hero") as CharacterBody2D;
-		 _timer = GetNode<Timer>("Timer");
+		_hero = GetTree().Root.GetNode<CharacterBody2D>("World/Hero");
+		_timer = GetNode<Timer>("Timer");
 		_timer.Autostart = true;
-		 _timer.Connect("timeout", new Callable(this, "onTimerTimeout"));
-		 //Connect("ChangeTime", new Callable(Hero, "change_time"));
-		PackedScene _level1 = GD.Load<PackedScene>("res://Enemy/Types/Level1/Level1.tscn");
-		GD.Print("stj", _level1);
-		SpawnInfo sth = new SpawnInfo
+		_timer.Connect("timeout", new Callable(this, "onTimerTimeout"));
+		// Connect("ChangeTime", new Callable(_hero, "change_time"));
+		var _level1 = GD.Load<PackedScene>("res://Enemy/Types/Level1/Level1.tscn");
+		var sth = new SpawnInfo
 		{
-			 Enemy = _level1,
+			Enemy = _level1,
 			SpawnDelayCounter = 0,
 			EnemyNum = 1,
 			TimeStart = 0,
 			TimeEnd = 30,
 			EnemySpawnDelay = 0
 		};
-		GD.Print("stj", sth);
-		Spawns.Add(sth);
+		_spawns.Add(sth);
 	}
-	
+
 	public void onTimerTimeout()
 	{
 		GD.Print("onTimerTimeout");
-		Time++;
-		var EnemySprawns = Spawns;
-		foreach (SpawnInfo Es in EnemySprawns)
-		{
-			if (Time > Es.TimeStart && Time < Es.TimeEnd)
+		_time++;
+		var EnemySprawns = _spawns;
+		foreach (var Es in EnemySprawns)
+			if (_time > Es.TimeStart && _time < Es.TimeEnd)
 			{
 				if (Es.SpawnDelayCounter < Es.EnemySpawnDelay)
 				{
@@ -60,46 +55,45 @@ public partial class EnemySpawner : Node2D
 					}
 				}
 			}
-		}
 		//EmitSignal("ChangeTime", Time);
 	}
-	
+
 	private Vector2 GetRandomPosition()
 	{
-		var Vpr = GetViewportRect().Size;
-		var TopLeft = new Vector2(Hero.GlobalPosition.X - Vpr.X / 2, Hero.GlobalPosition.Y - Vpr.Y / 2);
-		var TopRight = new Vector2(Hero.GlobalPosition.X + Vpr.X / 2, Hero.GlobalPosition.Y - Vpr.Y / 2);
-		var BottomLeft = new Vector2(Hero.GlobalPosition.X - Vpr.X / 2, Hero.GlobalPosition.Y + Vpr.Y / 2);
-		var BottomRight = new Vector2(Hero.GlobalPosition.X + Vpr.X / 2, Hero.GlobalPosition.Y + Vpr.Y / 2);
-		string[] Positions = { "up", "down", "left", "right" };
-		
-		Random random = new Random();
-		int r = random.Next(Positions.Length);
-		string RandomPosition = Positions[r];
+		var vpr = GetViewportRect().Size;
+		var topLeft = new Vector2(_hero.GlobalPosition.X - vpr.X / 2, _hero.GlobalPosition.Y - vpr.Y / 2);
+		var topRight = new Vector2(_hero.GlobalPosition.X + vpr.X / 2, _hero.GlobalPosition.Y - vpr.Y / 2);
+		var bottomLeft = new Vector2(_hero.GlobalPosition.X - vpr.X / 2, _hero.GlobalPosition.Y + vpr.Y / 2);
+		var bottomRight = new Vector2(_hero.GlobalPosition.X + vpr.X / 2, _hero.GlobalPosition.Y + vpr.Y / 2);
+		string[] positions = { "up", "down", "left", "right" };
 
-		var SpawnPosition1 = Vector2.Zero;
-		var SpawnPosition2 = Vector2.Zero;
+		var random = new Random();
+		var r = random.Next(positions.Length);
+		var randomPosition = positions[r];
 
-		switch (RandomPosition)
+		var spawnPosition1 = Vector2.Zero;
+		var spawnPosition2 = Vector2.Zero;
+
+		switch (randomPosition)
 		{
 			case "up":
-				SpawnPosition1 = TopLeft;
-				SpawnPosition2 = TopRight;
+				spawnPosition1 = topLeft;
+				spawnPosition2 = topRight;
 				break;
 			case "down":
-				SpawnPosition1 = BottomLeft;
-				SpawnPosition2 = BottomRight;
+				spawnPosition1 = bottomLeft;
+				spawnPosition2 = bottomRight;
 				break;
 			case "left":
-				SpawnPosition1 = TopLeft;
-				SpawnPosition2 = BottomLeft;
+				spawnPosition1 = topLeft;
+				spawnPosition2 = bottomLeft;
 				break;
 			case "right":
-				SpawnPosition1 = TopRight;
-				SpawnPosition2 = BottomRight;
+				spawnPosition1 = topRight;
+				spawnPosition2 = bottomRight;
 				break;
 		}
 
-		return new Vector2(SpawnPosition1.X, SpawnPosition1.Y);
+		return new Vector2(spawnPosition1.X, spawnPosition1.Y);
 	}
 }

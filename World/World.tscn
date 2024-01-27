@@ -5,7 +5,7 @@
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_oebcq"]
 
-[node name="Node2D" type="Node2D"]
+[node name="World" type="Node2D"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_left = -4.0
@@ -14,5 +14,7 @@ offset_bottom = 649.0
 texture = SubResource("CanvasTexture_oebcq")
 
 [node name="Hero" parent="." instance=ExtResource("2_w3p0r")]
+position = Vector2(440, 263)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("4_jyvgn")]
+position = Vector2(-3, 1)
