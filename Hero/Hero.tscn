@@ -1,15 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://cl4awbg1m6xqj"]
+[gd_scene load_steps=10 format=3 uid="uid://cl4awbg1m6xqj"]
 
 [ext_resource type="Script" path="res://Hero/Hero.cs" id="1_naq11"]
 [ext_resource type="Texture2D" uid="uid://ngggwa84gr4x" path="res://Hero/Textures/Hero.png" id="2_x2mpn"]
 [ext_resource type="Script" path="res://Hero/HeroCollisionShape.cs" id="3_7n7ui"]
+[ext_resource type="PackedScene" uid="uid://brvoujg4dgmlt" path="res://Utility/HurtBox/HurtBox.tscn" id="4_jei71"]
+[ext_resource type="PackedScene" uid="uid://b5jfuwawmeb00" path="res://Utility/HitBox/HitBox.tscn" id="5_jbbno"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iapq5"]
 atlas = ExtResource("2_x2mpn")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jbd0s"]
-size = Vector2(42.5, 44)
+size = Vector2(22.5781, 36.125)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k4vpl"]
+size = Vector2(36, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3qph8"]
+size = Vector2(33, 48)
 
 [node name="Hero" type="CharacterBody2D"]
 script = ExtResource("1_naq11")
@@ -20,10 +28,34 @@ scale = Vector2(3, 3)
 texture = SubResource("AtlasTexture_iapq5")
 
 [node name="HeroCollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(2, 3)
+visible = false
+position = Vector2(0.289062, 5)
 shape = SubResource("RectangleShape2D_jbd0s")
 script = ExtResource("3_7n7ui")
 
 [node name="WalkTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="HurtBox2" parent="." instance=ExtResource("4_jei71")]
+visible = false
+position = Vector2(2, 2)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="HurtBox2" index="0"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_k4vpl")
+
+[node name="HitBox" parent="." instance=ExtResource("5_jbbno")]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(-25.5, 1)
+shape = SubResource("RectangleShape2D_3qph8")
+
+[connection signal="Hurt" from="HurtBox2" to="." method="_on_hurt_box_2_hurt"]
+
+[editable path="HurtBox2"]
+[editable path="HitBox"]

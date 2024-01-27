@@ -11,7 +11,7 @@ public partial class Enemy : CharacterBody2D
 
     private int _hp = 10;
 
-    private Vector2 _kockback = Vector2.Zero;
+    private int _kockback;
 
     private float _movementSpeed = 120.0f;
     private Sprite2D _sprite;
@@ -19,7 +19,7 @@ public partial class Enemy : CharacterBody2D
     public void OnHurtBoxHurt(int damage, int angle, int kockbackAmount)
     {
         _hp -= damage;
-        // _kockback = angle * kockbackAmount;
+        _kockback = angle * kockbackAmount;
         if (_hp <= 0) death();
     }
 
@@ -29,6 +29,8 @@ public partial class Enemy : CharacterBody2D
     {
         _hero = GetTree().Root.GetNode<CharacterBody2D>("World/Hero");
         _sprite = GetNode<Sprite2D>("Sprite");
+
+        AddToGroup("enemy");
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -38,7 +40,7 @@ public partial class Enemy : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-        _kockback = _kockback.MoveToward(Vector2.Zero, _kockbackRecovery);
+        // _kockback = _kockback.MoveToward(Vector2.Zero, _kockbackRecovery);
         var direction = Position.DirectionTo(_hero.GlobalPosition);
         Velocity = direction * _movementSpeed;
         // Velocity += _kockback;
@@ -54,5 +56,10 @@ public partial class Enemy : CharacterBody2D
         // animation of death
         // add loot
         QueueFree();
+    }
+
+    private void _on_hurt_box_2_hurt(long damage, double angle, double kockbackAmount)
+    {
+        death();
     }
 }
