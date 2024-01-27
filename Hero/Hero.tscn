@@ -15,12 +15,12 @@ size = Vector2(42.5, 44)
 script = ExtResource("1_naq11")
 
 [node name="HeroSprite" type="Sprite2D" parent="."]
-position = Vector2(291, 256)
+position = Vector2(0, 1)
 scale = Vector2(3, 3)
 texture = SubResource("AtlasTexture_iapq5")
 
 [node name="HeroCollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(291.75, 258)
+position = Vector2(2, 3)
 shape = SubResource("RectangleShape2D_jbd0s")
 script = ExtResource("3_7n7ui")
 

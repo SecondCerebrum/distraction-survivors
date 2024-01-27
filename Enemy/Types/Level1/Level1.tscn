@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bogj0k8uchu1a"]
+[gd_scene load_steps=5 format=3 uid="uid://bogj0k8uchu1a"]
 
 [ext_resource type="Texture2D" uid="uid://b654pbrme1s3f" path="res://Enemy/Types/Level1/Skull/Skull.png" id="1_ontbq"]
+[ext_resource type="Script" path="res://Enemy/Enemy.cs" id="1_snww8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hnkt5"]
 atlas = ExtResource("1_ontbq")
@@ -10,10 +11,11 @@ region = Rect2(0, 0, 16, 16)
 size = Vector2(16, 17)
 
 [node name="Level1" type="CharacterBody2D"]
+script = ExtResource("1_snww8")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_hnkt5")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_yayha")
