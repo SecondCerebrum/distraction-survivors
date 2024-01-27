@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dulvdh5a4rh3g"]
+
+[ext_resource type="Script" path="res://Objects/Gems/Gems.cs" id="1_45l46"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4tfp4"]
+
+[node name="Gems" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_45l46")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4tfp4")

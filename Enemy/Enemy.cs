@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class Enemy : CharacterBody2D
@@ -12,6 +13,8 @@ public partial class Enemy : CharacterBody2D
     private int _hp = 10;
 
     private int _kockback;
+    private PackedScene _loot = GD.Load<PackedScene>("res://Objects/Gems/Gems.tscn");
+    private Node _lootBase;
 
     private float _movementSpeed = 120.0f;
     private Sprite2D _sprite;
@@ -29,6 +32,7 @@ public partial class Enemy : CharacterBody2D
     {
         _hero = GetTree().Root.GetNode<CharacterBody2D>("World/Hero");
         _sprite = GetNode<Sprite2D>("Sprite");
+        _lootBase = GetTree().Root.GetNode<Node>("World"); //GetFirstNodeInGroup("loot");
 
         AddToGroup("enemy");
     }
@@ -55,6 +59,11 @@ public partial class Enemy : CharacterBody2D
         EmitSignal("RemoveFromArray", this);
         // animation of death
         // add loot
+        var loot = _loot.Instantiate() as Gems;
+        loot.GlobalPosition = GlobalPosition;
+        var random = new Random();
+        loot.value = random.Next(1, 30);
+        _lootBase.CallDeferred("add_child", loot);
         QueueFree();
     }
 
