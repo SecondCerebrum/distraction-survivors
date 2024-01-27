@@ -107,6 +107,7 @@ text = "Play"
 
 [node name="GiveUsMoney" type="AudioStreamPlayer" parent="Play"]
 stream = ExtResource("5_go22q")
+volume_db = 10.0
 
 [node name="DLC" type="Button" parent="."]
 layout_mode = 0
@@ -116,7 +117,7 @@ offset_right = 940.0
 offset_bottom = 485.0
 theme_override_fonts/font = ExtResource("3_tcakm")
 theme_override_font_sizes/font_size = 120
-text = "DLC"
+text = "Store"
 
 [node name="Coin1" type="AnimatedSprite2D" parent="DLC"]
 position = Vector2(81, 81)
@@ -142,6 +143,7 @@ text = "Exit"
 
 [node name="WhereAreYouGoing" type="AudioStreamPlayer" parent="Exit"]
 stream = ExtResource("16_ukjvb")
+volume_db = 10.0
 
 [node name="PopupMask" type="ColorRect" parent="."]
 visible = false
@@ -178,7 +180,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_tcakm")
 theme_override_font_sizes/font_size = 56
 theme_override_styles/normal = SubResource("StyleBoxFlat_i0kq7")
-text = "Yes, some DLCs"
+text = "Yes, some items!"
 
 [node name="Ready" type="Button" parent="ReadyWindow/CenterContainer/VBoxContainer"]
 layout_mode = 2
@@ -212,7 +214,7 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_tcakm")
 theme_override_font_sizes/font_size = 56
 theme_override_styles/normal = SubResource("StyleBoxFlat_i0kq7")
-text = "Exit to DLC store"
+text = "Exit to store"
 
 [node name="Exit" type="Button" parent="ExitWindow/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(650, 0)
@@ -228,13 +230,16 @@ stream = ExtResource("17_caogu")
 [connection signal="mouse_entered" from="Play" to="." method="_on_btn_hover"]
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="mouse_entered" from="DLC" to="." method="_on_btn_hover"]
+[connection signal="pressed" from="DLC" to="." method="_on_store_enter"]
 [connection signal="mouse_entered" from="Exit" to="." method="_on_btn_hover"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
 [connection signal="close_requested" from="ReadyWindow" to="." method="_on_ready_popup_close"]
 [connection signal="mouse_entered" from="ReadyWindow/CenterContainer/VBoxContainer/DLC" to="." method="_on_btn_hover"]
+[connection signal="pressed" from="ReadyWindow/CenterContainer/VBoxContainer/DLC" to="." method="_on_store_enter"]
 [connection signal="mouse_entered" from="ReadyWindow/CenterContainer/VBoxContainer/Ready" to="." method="_on_btn_hover"]
 [connection signal="pressed" from="ReadyWindow/CenterContainer/VBoxContainer/Ready" to="." method="_on_btn_play_click_end"]
 [connection signal="close_requested" from="ExitWindow" to="." method="_on_exit_popup_close"]
 [connection signal="mouse_entered" from="ExitWindow/CenterContainer/VBoxContainer/DLC" to="." method="_on_btn_hover"]
+[connection signal="pressed" from="ExitWindow/CenterContainer/VBoxContainer/DLC" to="." method="_on_store_enter"]
 [connection signal="mouse_entered" from="ExitWindow/CenterContainer/VBoxContainer/Exit" to="." method="_on_btn_hover"]
 [connection signal="pressed" from="ExitWindow/CenterContainer/VBoxContainer/Exit" to="." method="_on_exit"]

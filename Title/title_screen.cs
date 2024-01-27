@@ -40,6 +40,14 @@ public partial class title_screen : Control
 		var _level = GetTree().ChangeSceneToFile(level);
 	}
 
+	private void _on_store_enter()
+	{
+		var storeScene = GD.Load<PackedScene>("res://Store/store.tscn");
+		GetTree().Root.AddChild(storeScene.Instantiate());
+		_readyWindow.Hide();
+		_popupMask.Hide();
+	}
+
 	private void _on_exit()
 	{
 		GetTree().Quit();
