@@ -1,8 +1,9 @@
 using Godot;
 using System;
 
-public partial class store_item : MarginContainer
+public partial class StoreItem : MarginContainer
 {
+	[Export] public string ID { get; set; }
 	[Export] public bool Bought { get; set; }
 
 	private ColorRect _dim;
@@ -13,10 +14,12 @@ public partial class store_item : MarginContainer
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_dim = GetNode<ColorRect>("TextureButton/Dim");
-		_buy = GetNode<Button>("TextureButton/Buy");
-		_bought = GetNode<Button>("TextureButton/Bought");
+		_dim = GetNode<ColorRect>("VBoxContainer/TextureButton/Dim");
+		_buy = GetNode<Button>("VBoxContainer/TextureButton/Buy");
+		_bought = GetNode<Button>("VBoxContainer/TextureButton/Bought");
 		_buySound = GetNode<AudioStreamPlayer>("BuySound");
+
+		if (Bought) _dim.Show();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -28,6 +31,7 @@ public partial class store_item : MarginContainer
 	{
 		_buySound.Play();
 		Bought = true;
+		if (ID is not null) GameState.Bought.Add(ID);
 		_dim.Show();
 		_buy.Hide();
 		_bought.Show();

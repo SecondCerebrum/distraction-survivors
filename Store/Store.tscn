@@ -1,26 +1,27 @@
-[gd_scene load_steps=27 format=3 uid="uid://ds3xp2ka5yxp"]
+[gd_scene load_steps=28 format=3 uid="uid://ds3xp2ka5yxp"]
 
-[ext_resource type="Script" path="res://Store/store.cs" id="1_hngsw"]
-[ext_resource type="Texture2D" uid="uid://b71hx2hljblx2" path="res://Images/premium_wall.jpg" id="2_8luey"]
-[ext_resource type="FontFile" uid="uid://dwsf88cq5dfmu" path="res://Fonts/Rye-Regular.ttf" id="3_uq0ve"]
-[ext_resource type="Texture2D" uid="uid://dlqnl7svaume5" path="res://Images/coin/frame_00_delay-0.08s.png" id="4_ntqoj"]
-[ext_resource type="Texture2D" uid="uid://bauvoehw74a0b" path="res://Images/coin/frame_01_delay-0.08s.png" id="5_imlqa"]
-[ext_resource type="Texture2D" uid="uid://bxsnehf6v6je8" path="res://Images/coin/frame_02_delay-0.08s.png" id="6_agnbp"]
-[ext_resource type="Texture2D" uid="uid://brm8b32od1rj8" path="res://Images/coin/frame_03_delay-0.08s.png" id="7_v03as"]
-[ext_resource type="Texture2D" uid="uid://c71dhr7pm4vw8" path="res://Images/coin/frame_04_delay-0.08s.png" id="8_ng6jb"]
-[ext_resource type="Texture2D" uid="uid://canaqap3bjxlb" path="res://Images/coin/frame_05_delay-0.08s.png" id="9_6ctc3"]
-[ext_resource type="Texture2D" uid="uid://cbwynawi7qeoc" path="res://Images/coin/frame_06_delay-0.08s.png" id="10_fdfwd"]
-[ext_resource type="Texture2D" uid="uid://0gpl5pdaap4r" path="res://Images/coin/frame_07_delay-0.08s.png" id="11_t7qu1"]
-[ext_resource type="Texture2D" uid="uid://khdt7n5dwsm5" path="res://Images/coin/frame_08_delay-0.08s.png" id="12_bkm2l"]
-[ext_resource type="Texture2D" uid="uid://cpehe7ifwed5k" path="res://Images/coin/frame_09_delay-0.08s.png" id="13_ojf5i"]
-[ext_resource type="Texture2D" uid="uid://q6hqnkupt0fc" path="res://Images/diamond/frame_0_delay-0.25s.png" id="14_8wy40"]
-[ext_resource type="Texture2D" uid="uid://w7l706qbti2x" path="res://Images/diamond/frame_1_delay-0.25s.png" id="15_uhc8t"]
-[ext_resource type="Texture2D" uid="uid://753sru74cjdc" path="res://Images/diamond/frame_2_delay-0.25s.png" id="16_eat0l"]
-[ext_resource type="Texture2D" uid="uid://0kl8mrcxd80e" path="res://Images/diamond/frame_3_delay-0.25s.png" id="17_xkl2r"]
-[ext_resource type="AudioStream" uid="uid://bkvcqhqu8qu0u" path="res://Sounds/money_drop.wav" id="18_vbdh8"]
-[ext_resource type="AudioStream" uid="uid://t80hocb4hv8v" path="res://Voices/payment.wav" id="20_40oog"]
-[ext_resource type="Texture2D" uid="uid://c3lxffj0dnsr0" path="res://Images/terminal.png" id="20_yxotj"]
-[ext_resource type="AudioStream" uid="uid://bg87hcipovive" path="res://Voices/your_loss.wav" id="21_3yntx"]
+[ext_resource type="Script" path="res://Store/Store.cs" id="1_5d2jm"]
+[ext_resource type="Texture2D" uid="uid://b71hx2hljblx2" path="res://Images/premium_wall.jpg" id="2_l58bt"]
+[ext_resource type="FontFile" uid="uid://dwsf88cq5dfmu" path="res://Fonts/Rye-Regular.ttf" id="3_702ss"]
+[ext_resource type="Texture2D" uid="uid://dlqnl7svaume5" path="res://Images/coin/frame_00_delay-0.08s.png" id="4_qxhxd"]
+[ext_resource type="Texture2D" uid="uid://bauvoehw74a0b" path="res://Images/coin/frame_01_delay-0.08s.png" id="5_tbeq1"]
+[ext_resource type="Texture2D" uid="uid://bxsnehf6v6je8" path="res://Images/coin/frame_02_delay-0.08s.png" id="6_u50jy"]
+[ext_resource type="Texture2D" uid="uid://brm8b32od1rj8" path="res://Images/coin/frame_03_delay-0.08s.png" id="7_vxiej"]
+[ext_resource type="Texture2D" uid="uid://c71dhr7pm4vw8" path="res://Images/coin/frame_04_delay-0.08s.png" id="8_7ikun"]
+[ext_resource type="Texture2D" uid="uid://canaqap3bjxlb" path="res://Images/coin/frame_05_delay-0.08s.png" id="9_q5ho3"]
+[ext_resource type="Texture2D" uid="uid://cbwynawi7qeoc" path="res://Images/coin/frame_06_delay-0.08s.png" id="10_ivv3g"]
+[ext_resource type="Texture2D" uid="uid://0gpl5pdaap4r" path="res://Images/coin/frame_07_delay-0.08s.png" id="11_67anh"]
+[ext_resource type="Texture2D" uid="uid://khdt7n5dwsm5" path="res://Images/coin/frame_08_delay-0.08s.png" id="12_3yi5u"]
+[ext_resource type="Texture2D" uid="uid://cpehe7ifwed5k" path="res://Images/coin/frame_09_delay-0.08s.png" id="13_mqjfd"]
+[ext_resource type="Texture2D" uid="uid://q6hqnkupt0fc" path="res://Images/diamond/frame_0_delay-0.25s.png" id="14_ygr4w"]
+[ext_resource type="Texture2D" uid="uid://w7l706qbti2x" path="res://Images/diamond/frame_1_delay-0.25s.png" id="15_tir2u"]
+[ext_resource type="Texture2D" uid="uid://753sru74cjdc" path="res://Images/diamond/frame_2_delay-0.25s.png" id="16_c6gn4"]
+[ext_resource type="Texture2D" uid="uid://0kl8mrcxd80e" path="res://Images/diamond/frame_3_delay-0.25s.png" id="17_te1ea"]
+[ext_resource type="AudioStream" uid="uid://bkvcqhqu8qu0u" path="res://Sounds/money_drop.wav" id="18_kuevv"]
+[ext_resource type="AudioStream" uid="uid://f6mclexx66ka" path="res://Store/scan.wav" id="19_eiass"]
+[ext_resource type="AudioStream" uid="uid://t80hocb4hv8v" path="res://Voices/payment.wav" id="19_v8eqa"]
+[ext_resource type="AudioStream" uid="uid://bg87hcipovive" path="res://Voices/your_loss.wav" id="20_j7a80"]
+[ext_resource type="Texture2D" uid="uid://c3lxffj0dnsr0" path="res://Images/terminal.png" id="21_haeww"]
 
 [sub_resource type="Animation" id="Animation_adhpi"]
 length = 0.001
@@ -134,34 +135,34 @@ _data = {
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_ntqoj")
+"texture": ExtResource("4_qxhxd")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_imlqa")
+"texture": ExtResource("5_tbeq1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_agnbp")
+"texture": ExtResource("6_u50jy")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_v03as")
+"texture": ExtResource("7_vxiej")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_ng6jb")
+"texture": ExtResource("8_7ikun")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_6ctc3")
+"texture": ExtResource("9_q5ho3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_fdfwd")
+"texture": ExtResource("10_ivv3g")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_t7qu1")
+"texture": ExtResource("11_67anh")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_bkm2l")
+"texture": ExtResource("12_3yi5u")
 }, {
 "duration": 1.0,
-"texture": ExtResource("13_ojf5i")
+"texture": ExtResource("13_mqjfd")
 }],
 "loop": true,
 "name": &"default",
@@ -172,16 +173,16 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("14_8wy40")
+"texture": ExtResource("14_ygr4w")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_uhc8t")
+"texture": ExtResource("15_tir2u")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_eat0l")
+"texture": ExtResource("16_c6gn4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("17_xkl2r")
+"texture": ExtResource("17_te1ea")
 }],
 "loop": true,
 "name": &"default",
@@ -195,7 +196,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_hngsw")
+script = ExtResource("1_5d2jm")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -204,7 +205,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_8luey")
+texture = ExtResource("2_l58bt")
 expand_mode = 1
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -231,7 +232,7 @@ offset_bottom = -1.0
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("3_uq0ve")
+theme_override_fonts/font = ExtResource("3_702ss")
 theme_override_font_sizes/font_size = 40
 text = "Back"
 
@@ -243,7 +244,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("3_uq0ve")
+theme_override_fonts/font = ExtResource("3_702ss")
 theme_override_font_sizes/font_size = 40
 text = "Coins: 000"
 
@@ -260,7 +261,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("3_uq0ve")
+theme_override_fonts/font = ExtResource("3_702ss")
 theme_override_font_sizes/font_size = 40
 text = "Diamonds: 000"
 
@@ -277,7 +278,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("3_uq0ve")
+theme_override_fonts/font = ExtResource("3_702ss")
 theme_override_font_sizes/font_size = 40
 text = "Buy more!"
 
@@ -291,7 +292,7 @@ offset_top = -229.0
 offset_bottom = -191.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_uq0ve")
+theme_override_fonts/font = ExtResource("3_702ss")
 theme_override_font_sizes/font_size = 30
 text = "Items in the store"
 horizontal_alignment = 1
@@ -316,7 +317,7 @@ offset_top = 54.0
 offset_bottom = 92.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_uq0ve")
+theme_override_fonts/font = ExtResource("3_702ss")
 theme_override_font_sizes/font_size = 30
 text = "Skills in the store"
 horizontal_alignment = 1
@@ -331,19 +332,22 @@ offset_bottom = 644.0
 layout_mode = 2
 
 [node name="OpenStoreSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("18_vbdh8")
+stream = ExtResource("18_kuevv")
+
+[node name="TerminalSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_eiass")
 
 [node name="Payment" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("20_40oog")
+stream = ExtResource("19_v8eqa")
 volume_db = 10.0
 
 [node name="YourLoss" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("21_3yntx")
+stream = ExtResource("20_j7a80")
 volume_db = 10.0
 
 [node name="TerminalWindow" type="Window" parent="."]
-position = Vector2i(800, 60)
-size = Vector2i(300, 550)
+position = Vector2i(855, 100)
+size = Vector2i(280, 530)
 visible = false
 unresizable = true
 always_on_top = true
@@ -355,10 +359,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("20_yxotj")
+texture = ExtResource("21_haeww")
 expand_mode = 3
 stretch_mode = 5
 
 [connection signal="pressed" from="HBoxContainer/BackBtn" to="." method="_on_back"]
 [connection signal="pressed" from="HBoxContainer/BuyBtn" to="." method="_on_buy_more"]
 [connection signal="close_requested" from="TerminalWindow" to="." method="_on_close_terminal"]
+[connection signal="window_input" from="TerminalWindow" to="." method="_on_terminal_window_input"]

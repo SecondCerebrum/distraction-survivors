@@ -42,7 +42,7 @@ public partial class title_screen : Control
 
 	private void _on_store_enter()
 	{
-		var storeScene = GD.Load<PackedScene>("res://Store/store.tscn");
+		var storeScene = GD.Load<PackedScene>("res://Store/Store.tscn");
 		GetTree().Root.AddChild(storeScene.Instantiate());
 		_readyWindow.Hide();
 		_exitWindow.Hide();
