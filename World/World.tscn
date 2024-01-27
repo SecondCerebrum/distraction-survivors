@@ -1,17 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbyqkxsc23oss"]
+[gd_scene load_steps=4 format=3 uid="uid://dbyqkxsc23oss"]
 
-[ext_resource type="Script" path="res://Hero/Hero.cs" id="1_uf52a"]
-[ext_resource type="Texture2D" uid="uid://ngggwa84gr4x" path="res://Hero/Textures/Hero.png" id="2_ai6ot"]
-[ext_resource type="Script" path="res://Hero/HeroCollisionShape.cs" id="3_awdqf"]
+[ext_resource type="PackedScene" uid="uid://cl4awbg1m6xqj" path="res://Hero/Hero.tscn" id="2_w3p0r"]
+[ext_resource type="PackedScene" uid="uid://cx1etwwkq8ylk" path="res://Enemy/EnemySpawner.tscn" id="4_jyvgn"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_oebcq"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_iapq5"]
-atlas = ExtResource("2_ai6ot")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jbd0s"]
-size = Vector2(42.5, 44)
 
 [node name="Node2D" type="Node2D"]
 
@@ -21,19 +13,6 @@ offset_right = 980.0
 offset_bottom = 649.0
 texture = SubResource("CanvasTexture_oebcq")
 
-[node name="Hero" type="CharacterBody2D" parent="."]
-script = ExtResource("1_uf52a")
+[node name="Hero" parent="." instance=ExtResource("2_w3p0r")]
 
-[node name="HeroSprite" type="Sprite2D" parent="Hero"]
-position = Vector2(291, 256)
-scale = Vector2(3, 3)
-texture = SubResource("AtlasTexture_iapq5")
-
-[node name="HeroCollisionShape" type="CollisionShape2D" parent="Hero"]
-position = Vector2(291.75, 258)
-shape = SubResource("RectangleShape2D_jbd0s")
-script = ExtResource("3_awdqf")
-
-[node name="WalkTimer" type="Timer" parent="Hero"]
-wait_time = 0.2
-one_shot = true
+[node name="EnemySpawner" parent="." instance=ExtResource("4_jyvgn")]

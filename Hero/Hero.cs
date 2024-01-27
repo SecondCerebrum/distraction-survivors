@@ -5,7 +5,7 @@ public partial class Hero : CharacterBody2D
 {
 	public const float Speed = 300.0f;
 	public const float JumpVelocity = -400.0f;
-	public const float MovementSpeed = 40.0f;
+	public const float MovementSpeed = 240.0f;
 	public const int Hp = 80;
 	public const int MaxHp = 80;
 	public Vector2 LastMovement = Vector2.Up;

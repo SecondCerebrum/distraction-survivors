@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://cl4awbg1m6xqj"]
+
+[ext_resource type="Script" path="res://Hero/Hero.cs" id="1_naq11"]
+[ext_resource type="Texture2D" uid="uid://ngggwa84gr4x" path="res://Hero/Textures/Hero.png" id="2_x2mpn"]
+[ext_resource type="Script" path="res://Hero/HeroCollisionShape.cs" id="3_7n7ui"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iapq5"]
+atlas = ExtResource("2_x2mpn")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jbd0s"]
+size = Vector2(42.5, 44)
+
+[node name="Hero" type="CharacterBody2D"]
+script = ExtResource("1_naq11")
+
+[node name="HeroSprite" type="Sprite2D" parent="."]
+position = Vector2(291, 256)
+scale = Vector2(3, 3)
+texture = SubResource("AtlasTexture_iapq5")
+
+[node name="HeroCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(291.75, 258)
+shape = SubResource("RectangleShape2D_jbd0s")
+script = ExtResource("3_7n7ui")
+
+[node name="WalkTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
