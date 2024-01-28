@@ -17,6 +17,8 @@ public enum SkillItemName
     LordSaveUs,
     CoinMagnet,
     BetterGrades,
+    Stuffed,
+    FrackingBlue,
 
     // Items
     Banhammer,
