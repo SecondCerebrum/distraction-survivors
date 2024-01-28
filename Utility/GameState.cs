@@ -16,6 +16,8 @@ public enum SkillItemName
     GloriousAchievements,
     LordSaveUs,
     CoinMagnet,
+    Stuffed,
+    FrackingBlue,
 
     // Items
     Banhammer,
