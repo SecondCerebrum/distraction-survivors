@@ -8,15 +8,11 @@ public partial class World : Node2D
 	private CollectCoinsWindow _collectCoinsWindow;
 	private Hero _hero;
 	private Random _random;
-	private SkillSelect _skillSelect;
-	private RoundSummary _roundSummary;
 	private Vector2 _viewportSize;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_skillSelect = GetNode<SkillSelect>("SkillSelectWindow");
-		_roundSummary = GetNode<RoundSummary>("RoundSummary");
 		_collectCoinsWindow = GetNode<CollectCoinsWindow>("CollectCoinsWindow");
 		_viewportSize = GetViewportRect().Size;
 		_random = new Random();
@@ -56,13 +52,18 @@ public partial class World : Node2D
 
 	private void _on_skill_select()
 	{
-		_skillSelect.Show();
+		var skillSelect = GD.Load<PackedScene>("res://World/Components/SkillSelect.tscn");
+		var skillSelectInstance = skillSelect.Instantiate<SkillSelect>();
+		AddChild(skillSelectInstance);
+		skillSelectInstance.Show();
 	}
 
 	private void _on_round_summary()
 	{
-		_roundSummary.Show();
-		_roundSummary.Run();
+		var summary = GD.Load<PackedScene>("res://World/Components/RoundSummary.tscn");
+		var summaryInstance = summary.Instantiate<RoundSummary>();
+		AddChild(summaryInstance);
+		summaryInstance.Run(20, 5, 60);
 	}
 
 	private void _on_collect_popup()

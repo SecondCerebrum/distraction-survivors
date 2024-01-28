@@ -6,19 +6,21 @@ using System.Linq;
 public partial class RoundSummary : Window
 {
 	[Export] public int RoundCoins { get; set; } = 20;
+	[Export] public int RoundDiamonds { get; set; } = 2;
 	[Export] public int RoundTime { get; set; } = 40;
 	[Signal] public delegate void CoinsCountUpEndEventHandler();
 	[Signal] public delegate void CoinsCountDownEndEventHandler();
+	[Signal] public delegate void DiamondsCountUpEndEventHandler();
 	[Signal] public delegate void TimeCountUpEndEventHandler();
 	private AnimationPlayer _animationPlayer;
-	private AudioStreamPlayer _audioStreamPlayer;
+	private AudioStreamPlayer _countingSound;
+	private AudioStreamPlayer _punchSound;
 	private Button _nextRound;
 	private Button _store;
 	private Label _coinsLbl;
 	private Label _coinsCount;
+	private Label _diamondsCount;
 	private Label _timeCount;
-	private int _countingCoins = 0;
-	private int _countingTime = 0;
 
 	// Called when the node enters the scene tree for the first time.
 	public async override void _Ready()
@@ -27,8 +29,11 @@ public partial class RoundSummary : Window
 		_store = GetNode<Button>("Store");
 		_coinsLbl = GetNode<Label>("CoinsLbl");
 		_coinsCount = GetNode<Label>("CoinsCount");
+		_diamondsCount = GetNode<Label>("DiamondsCount");
 		_timeCount = GetNode<Label>("TimeCount");
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		_countingSound = GetNode<AudioStreamPlayer>("CountingSound");
+		_punchSound = GetNode<AudioStreamPlayer>("PunchSound");
 		GetNode<AnimatedSprite2D>("CoinsLbl/Coin").Play();
 		GetNode<AnimatedSprite2D>("DiamondsLbl/Diamond").Play();
 		GetNode<AnimatedSprite2D>("Store/Coin1").Play();
@@ -41,24 +46,31 @@ public partial class RoundSummary : Window
 
 	}
 
-	public async void Run()
+	public async void Run(int roundCoins, int roundDiamonds, int roundTime)
 	{
+		RoundCoins = roundCoins;
+		RoundDiamonds = roundDiamonds;
+		RoundTime = roundTime;
+
 		await ToSignal(GetTree().CreateTimer(0.5f), SceneTreeTimer.SignalName.Timeout);
 		_coinsLbl.Show();
 		_coinsCount.Show();
 
-		var coinCounter = new Timer() { WaitTime = 0.1 };
-		AddChild(coinCounter);
-		coinCounter.Timeout += () => {
-			_countingCoins++;
-			_coinsCount.Text = _countingCoins.ToString();
-			if (_countingCoins == RoundCoins)
+		var counter = new Timer() { WaitTime = 0.1 };
+		AddChild(counter);
+		int countingCoins = 0;
+		counter.Timeout += () => {
+			countingCoins++;
+			_coinsCount.Text = countingCoins.ToString();
+			if (countingCoins == RoundCoins)
 			{
-				coinCounter.Stop();
+				counter.Stop();
+				_countingSound.Stop();
 				EmitSignal(SignalName.CoinsCountUpEnd);
 			}
 		};
-		coinCounter.Start();
+		counter.Start();
+		_countingSound.Play();
 		await ToSignal(this, SignalName.CoinsCountUpEnd);
 		GD.Print("count end");
 
@@ -67,18 +79,20 @@ public partial class RoundSummary : Window
 			GetNode<Label>("NoSkill").Show();
 			await ToSignal(GetTree().CreateTimer(1f), SceneTreeTimer.SignalName.Timeout);
 
-			coinCounter = new Timer() { WaitTime = 0.05 };
-			AddChild(coinCounter);
-			coinCounter.Timeout += () => {
-				_countingCoins--;
-				_coinsCount.Text = _countingCoins.ToString();
-				if (_countingCoins == 0)
+			counter = new Timer() { WaitTime = 0.05 };
+			AddChild(counter);
+			counter.Timeout += () => {
+				countingCoins--;
+				_coinsCount.Text = countingCoins.ToString();
+				if (countingCoins == 0)
 				{
-					coinCounter.Stop();
+					counter.Stop();
+					_countingSound.Stop();
 					EmitSignal(SignalName.CoinsCountDownEnd);
 				}
 			};
-			coinCounter.Start();
+			counter.Start();
+			_countingSound.Play();
 		}
 		else EmitSignal(SignalName.CoinsCountDownEnd);
 
@@ -88,23 +102,43 @@ public partial class RoundSummary : Window
 		GetNode<Label>("DiamondsLbl").Show();
 		GetNode<Label>("DiamondsCount").Show();
 
+		counter = new Timer() { WaitTime = 0.1 };
+		AddChild(counter);
+		int countingDiamonds = 0;
+		counter.Timeout += () => {
+			countingDiamonds++;
+			_diamondsCount.Text = countingDiamonds.ToString();
+			if (countingDiamonds == RoundDiamonds)
+			{
+				counter.Stop();
+				_countingSound.Stop();
+				EmitSignal(SignalName.DiamondsCountUpEnd);
+			}
+		};
+		counter.Start();
+		_countingSound.Play();
+		await ToSignal(this, SignalName.DiamondsCountUpEnd);
+
 		await ToSignal(GetTree().CreateTimer(1f), SceneTreeTimer.SignalName.Timeout);
 
 		GetNode<Label>("TimeLbl").Show();
 		GetNode<Label>("TimeCount").Show();
 
-		coinCounter = new Timer() { WaitTime = 0.05 };
-		AddChild(coinCounter);
-		coinCounter.Timeout += () => {
-			_countingTime++;
-			_timeCount.Text = _countingTime.ToString();
-			if (_countingTime == RoundTime)
+		counter = new Timer() { WaitTime = 0.05 };
+		AddChild(counter);
+		int countingTime = 0;
+		counter.Timeout += () => {
+			countingTime++;
+			_timeCount.Text = countingTime.ToString();
+			if (countingTime == RoundTime)
 			{
-				coinCounter.Stop();
+				counter.Stop();
+				_countingSound.Stop();
 				EmitSignal(SignalName.TimeCountUpEnd);
 			}
 		};
-		coinCounter.Start();
+		counter.Start();
+		_countingSound.Play();
 
 		await ToSignal(this, SignalName.TimeCountUpEnd);
 		await ToSignal(GetTree().CreateTimer(1f), SceneTreeTimer.SignalName.Timeout);
@@ -112,11 +146,12 @@ public partial class RoundSummary : Window
 		if (GameState.Bought.Contains(SkillItemName.BetterGrades)) GetNode<Sprite2D>("GradeA").Show();
 		else GetNode<Sprite2D>("GradeF").Show();
 		_animationPlayer.Play("grade");
+		_punchSound.Play();
 	}
 
 	private void _on_next_round()
 	{
-
+		GetParent().RemoveChild(this);;
 	}
 
 	private void _on_store()

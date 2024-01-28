@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://wum1emofmomc"]
+[gd_scene load_steps=29 format=3 uid="uid://wum1emofmomc"]
 
 [ext_resource type="Script" path="res://World/Components/RoundSummary.cs" id="1_petdu"]
 [ext_resource type="FontFile" uid="uid://dwsf88cq5dfmu" path="res://Fonts/Rye-Regular.ttf" id="2_vw67f"]
@@ -19,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://btcp31mpawu85" path="res://Images/time.png" id="17_md4qq"]
 [ext_resource type="Texture2D" uid="uid://c1osnfk2ttxcc" path="res://World/Components/grade_f.png" id="18_7tyw0"]
 [ext_resource type="Texture2D" uid="uid://b7yrjq76gw8sq" path="res://World/Components/grade_a.png" id="19_ffve2"]
+[ext_resource type="AudioStream" uid="uid://bsfqkfjomow0h" path="res://World/Components/counting.mp3" id="20_sswga"]
+[ext_resource type="AudioStream" uid="uid://de2a1n4uukjyy" path="res://World/Components/punch.mp3" id="21_vmxpj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qshjo"]
 animations = [{
@@ -116,9 +118,80 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Animation" id="Animation_cwi1r"]
-resource_name = "summary"
-length = 4.0
+[sub_resource type="Animation" id="Animation_t82j3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GradeF:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.245, 0.245)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GradeF:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GradeA:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.575, 0.575)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GradeA:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("NextRound:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-370, 201.76)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Store:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(31.725, 465.663)]
+}
 
 [sub_resource type="Animation" id="Animation_dveti"]
 resource_name = "grade"
@@ -195,80 +268,9 @@ tracks/5/keys = {
 "values": [Vector2(31.725, 465.663), Vector2(31.725, 303.345)]
 }
 
-[sub_resource type="Animation" id="Animation_t82j3"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GradeF:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.245, 0.245)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("GradeF:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("GradeA:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.575, 0.575)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("GradeA:self_modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("NextRound:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-370, 201.76)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Store:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(31.725, 465.663)]
-}
+[sub_resource type="Animation" id="Animation_cwi1r"]
+resource_name = "summary"
+length = 4.0
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_72j7n"]
 _data = {
@@ -278,6 +280,7 @@ _data = {
 }
 
 [node name="RoundSummary" type="Window"]
+process_mode = 3
 title = "You did well (enough)"
 initial_position = 2
 size = Vector2i(600, 430)
@@ -429,7 +432,11 @@ libraries = {
 "": SubResource("AnimationLibrary_72j7n")
 }
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="CountingSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_sswga")
+
+[node name="PunchSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_vmxpj")
 
 [node name="NoSkill" type="Label" parent="."]
 visible = false

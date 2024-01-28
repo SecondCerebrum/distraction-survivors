@@ -1,4 +1,6 @@
-public class StoreItemData
+using Godot;
+
+public partial class StoreItemData : GodotObject
 {
 	public SkillItemName ID { get; set; }
 	public string Title { get; set; }

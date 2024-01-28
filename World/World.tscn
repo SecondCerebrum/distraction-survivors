@@ -1,10 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://dbyqkxsc23oss"]
+[gd_scene load_steps=20 format=3 uid="uid://dbyqkxsc23oss"]
 
 [ext_resource type="Texture2D" uid="uid://bymw84uh1ihmj" path="res://World/Background/TilesetFloor.png" id="1_ggooo"]
 [ext_resource type="Script" path="res://World/World.cs" id="1_si70w"]
 [ext_resource type="PackedScene" uid="uid://cl4awbg1m6xqj" path="res://Hero/Hero.tscn" id="2_w3p0r"]
 [ext_resource type="PackedScene" uid="uid://cx1etwwkq8ylk" path="res://Enemy/EnemySpawner.tscn" id="4_jyvgn"]
-[ext_resource type="PackedScene" uid="uid://uvbtqi3fvjge" path="res://World/Components/SkillSelect.tscn" id="5_3j8d6"]
 [ext_resource type="FontFile" uid="uid://dwsf88cq5dfmu" path="res://Fonts/Rye-Regular.ttf" id="5_yymnn"]
 [ext_resource type="Texture2D" uid="uid://dlqnl7svaume5" path="res://Images/coin/frame_00_delay-0.08s.png" id="6_1fuf6"]
 [ext_resource type="PackedScene" uid="uid://gxruecvgksyc" path="res://World/Components/CollectCoinsWindow.tscn" id="6_qxim1"]
@@ -17,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://0gpl5pdaap4r" path="res://Images/coin/frame_07_delay-0.08s.png" id="13_dy386"]
 [ext_resource type="Texture2D" uid="uid://khdt7n5dwsm5" path="res://Images/coin/frame_08_delay-0.08s.png" id="14_g65t5"]
 [ext_resource type="Texture2D" uid="uid://cpehe7ifwed5k" path="res://Images/coin/frame_09_delay-0.08s.png" id="15_0fgra"]
-[ext_resource type="PackedScene" uid="uid://wum1emofmomc" path="res://World/Components/RoundSummary.tscn" id="18_ipanc"]
 [ext_resource type="PackedScene" uid="uid://ftnyxg4wg4tn" path="res://World/Components/Achievement.tscn" id="18_t7dvg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wtqea"]
@@ -79,6 +77,7 @@ position = Vector2(504, 283)
 position = Vector2(-3, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+process_mode = 3
 offset_left = 1071.0
 offset_right = 1152.0
 offset_bottom = 649.0
@@ -124,13 +123,7 @@ position = Vector2(-28.28, 18.61)
 scale = Vector2(0.164, 0.164)
 sprite_frames = SubResource("SpriteFrames_jic7j")
 
-[node name="SkillSelectWindow" parent="." instance=ExtResource("5_3j8d6")]
-visible = false
-
 [node name="CollectCoinsWindow" parent="." instance=ExtResource("6_qxim1")]
-visible = false
-
-[node name="RoundSummary" parent="." instance=ExtResource("18_ipanc")]
 visible = false
 
 [node name="Achievement" parent="." instance=ExtResource("18_t7dvg")]

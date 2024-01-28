@@ -36,38 +36,23 @@ public partial class Store : Control
 		_coinsLbl = GetNode<Label>("HBoxContainer/CoinsLbl");
 		_diamondsLbl = GetNode<Label>("HBoxContainer/DiamondsLbl");
 
+		_coin.Play();
+		_diamond.Play();
 		_openStoreSound.Play();
-		_on_counters_update();
 
 		var storeItem = GD.Load<PackedScene>("res://Store/StoreItem.tscn");
 
 		foreach (var item in ItemList.Get())
 		{
 			var newItem = storeItem.Instantiate<StoreItem>();
-			newItem.ID = item.ID;
-			newItem.Bought = GameState.Bought.Contains(item.ID);
-			var button = newItem.GetNode<TextureButton>("VBoxContainer/TextureButton");
-			var label = newItem.GetNode<Label>("VBoxContainer/Label");
-
-			button.TextureNormal = ImageTexture.CreateFromImage(Image.LoadFromFile(item.Texture));
-			button.TooltipText = item.Description;
-			label.Text = item.Title;
-
+			newItem.Item = item;
 			_itemList.AddChild(newItem);
 		}
 
 		foreach (var skill in SkillList.Get())
 		{
 			var newItem = storeItem.Instantiate<StoreItem>();
-			newItem.ID = skill.ID;
-			newItem.Bought = GameState.Bought.Contains(skill.ID);
-			var button = newItem.GetNode<TextureButton>("VBoxContainer/TextureButton");
-			var label = newItem.GetNode<Label>("VBoxContainer/Label");
-
-			button.TextureNormal = ImageTexture.CreateFromImage(Image.LoadFromFile(skill.Texture));
-			button.TooltipText = skill.Description;
-			label.Text = skill.Title;
-
+			newItem.Item = skill;
 			_skillList.AddChild(newItem);
 		}
 	}
@@ -75,8 +60,8 @@ public partial class Store : Control
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		_coin.Play();
-		_diamond.Play();
+		if (GameState.Bought.Contains(SkillItemName.ActivePause)) GetTree().Paused = true;
+		_on_counters_update();
 	}
 
 	private void _on_back()
@@ -112,8 +97,8 @@ public partial class Store : Control
 		{
 			_payment.Stop();
 			_terminalSound.Play();
-			GameState.Coins += 20;
-			GameState.Diamonds += 5;
+			GameState.Coins += 10;
+			GameState.Diamonds += 1;
 			_on_counters_update();
 			_terminalUsed = true;
 		}

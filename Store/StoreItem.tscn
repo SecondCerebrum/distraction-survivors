@@ -1,8 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://ce6tku5f380lx"]
+[gd_scene load_steps=22 format=3 uid="uid://ce6tku5f380lx"]
 
 [ext_resource type="Script" path="res://Store/StoreItem.cs" id="1_uow8s"]
 [ext_resource type="FontFile" uid="uid://dwsf88cq5dfmu" path="res://Fonts/Rye-Regular.ttf" id="2_3ecd1"]
+[ext_resource type="Texture2D" uid="uid://dlqnl7svaume5" path="res://Images/coin/frame_00_delay-0.08s.png" id="3_q2sc5"]
 [ext_resource type="AudioStream" uid="uid://b53owe838mdyn" path="res://Store/cha-ching.wav" id="3_xmqpf"]
+[ext_resource type="Texture2D" uid="uid://bauvoehw74a0b" path="res://Images/coin/frame_01_delay-0.08s.png" id="4_iqxar"]
+[ext_resource type="Texture2D" uid="uid://bxsnehf6v6je8" path="res://Images/coin/frame_02_delay-0.08s.png" id="5_dp0rp"]
+[ext_resource type="Texture2D" uid="uid://brm8b32od1rj8" path="res://Images/coin/frame_03_delay-0.08s.png" id="6_5tjve"]
+[ext_resource type="Texture2D" uid="uid://c71dhr7pm4vw8" path="res://Images/coin/frame_04_delay-0.08s.png" id="7_7rm18"]
+[ext_resource type="Texture2D" uid="uid://canaqap3bjxlb" path="res://Images/coin/frame_05_delay-0.08s.png" id="8_bq8nw"]
+[ext_resource type="Texture2D" uid="uid://cbwynawi7qeoc" path="res://Images/coin/frame_06_delay-0.08s.png" id="9_6ldcj"]
+[ext_resource type="Texture2D" uid="uid://0gpl5pdaap4r" path="res://Images/coin/frame_07_delay-0.08s.png" id="10_b4akf"]
+[ext_resource type="Texture2D" uid="uid://khdt7n5dwsm5" path="res://Images/coin/frame_08_delay-0.08s.png" id="11_cjujs"]
+[ext_resource type="Texture2D" uid="uid://cpehe7ifwed5k" path="res://Images/coin/frame_09_delay-0.08s.png" id="12_wtcw6"]
+[ext_resource type="Texture2D" uid="uid://q6hqnkupt0fc" path="res://Images/diamond/frame_0_delay-0.25s.png" id="13_26img"]
+[ext_resource type="Texture2D" uid="uid://w7l706qbti2x" path="res://Images/diamond/frame_1_delay-0.25s.png" id="14_4nxnu"]
+[ext_resource type="Texture2D" uid="uid://753sru74cjdc" path="res://Images/diamond/frame_2_delay-0.25s.png" id="15_k0ejl"]
+[ext_resource type="Texture2D" uid="uid://0kl8mrcxd80e" path="res://Images/diamond/frame_3_delay-0.25s.png" id="16_sc73s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_riypd"]
 bg_color = Color(0, 0, 0, 1)
@@ -11,6 +25,64 @@ bg_color = Color(0, 0, 0, 1)
 TooltipLabel/font_sizes/font_size = 24
 TooltipLabel/fonts/font = ExtResource("2_3ecd1")
 TooltipPanel/styles/panel = SubResource("StyleBoxFlat_riypd")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_riiet"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_q2sc5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_iqxar")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_dp0rp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_5tjve")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_7rm18")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_bq8nw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_6ldcj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_b4akf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_cjujs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_wtcw6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i3gcn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_26img")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_4nxnu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_k0ejl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_sc73s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="StoreItem" type="MarginContainer"]
 offset_right = 170.0
@@ -73,6 +145,30 @@ mouse_filter = 1
 theme_override_fonts/font = ExtResource("2_3ecd1")
 theme_override_font_sizes/font_size = 30
 text = "Bought"
+
+[node name="Cost" type="Label" parent="VBoxContainer/TextureButton"]
+visible = false
+offset_left = 48.62
+offset_top = 3.315
+offset_right = 273.62
+offset_bottom = 54.315
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_3ecd1")
+theme_override_font_sizes/font_size = 20
+text = "0"
+
+[node name="Coin" type="AnimatedSprite2D" parent="VBoxContainer/TextureButton/Cost"]
+visible = false
+position = Vector2(-28.28, 11.845)
+scale = Vector2(0.104, 0.104)
+sprite_frames = SubResource("SpriteFrames_riiet")
+
+[node name="Diamond" type="AnimatedSprite2D" parent="VBoxContainer/TextureButton/Cost"]
+visible = false
+position = Vector2(-28.16, 12.475)
+scale = Vector2(0.129, 0.129)
+sprite_frames = SubResource("SpriteFrames_i3gcn")
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2

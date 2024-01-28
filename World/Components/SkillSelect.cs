@@ -25,19 +25,18 @@ public partial class SkillSelect : Window
 		{
 			itemsToShow.Add(availableSkills[_random.Next(availableSkills.Length)]);
 		}
+		if (availableItems.Length > 0)
+		{
+			itemsToShow.Add(availableItems[_random.Next(availableItems.Length)]);
+			itemsToShow.Add(availableItems[_random.Next(availableItems.Length)]);
+		}
 
-		foreach (var items in itemsToShow)
+		foreach (var item in itemsToShow)
 		{
 			var newItem = storeItem.Instantiate<StoreItem>();
-			newItem.ID = items.ID;
-			newItem.Bought = GameState.Bought.Contains(items.ID);
-			var button = newItem.GetNode<TextureButton>("VBoxContainer/TextureButton");
-			var label = newItem.GetNode<Label>("VBoxContainer/Label");
-
-			button.TextureNormal = ImageTexture.CreateFromImage(Image.LoadFromFile(items.Texture));
-			button.TooltipText = items.Description;
-			label.Text = items.Title;
-
+			newItem.Item = item;
+			newItem.FreeCost = true;
+			newItem.Select += _on_close_requested;
 			_skillList.AddChild(newItem);
 		}
 	}
@@ -50,6 +49,6 @@ public partial class SkillSelect : Window
 
 	private void _on_close_requested()
 	{
-		Hide();
+		GetParent().RemoveChild(this);
 	}
 }
