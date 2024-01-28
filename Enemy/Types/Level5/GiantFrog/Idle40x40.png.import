@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8kh850ssl5sa"
-path="res://.godot/imported/SpriteSheet.png-c08f9bf0a15ce1fbac73750a03140e57.ctex"
+uid="uid://2ekjognb5auo"
+path="res://.godot/imported/Idle40x40.png-f28dcb979b0ee9310763eb6d04f26bde.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemy/Types/Level2/Octopus/SpriteSheet.png"
-dest_files=["res://.godot/imported/SpriteSheet.png-c08f9bf0a15ce1fbac73750a03140e57.ctex"]
+source_file="res://Enemy/Types/Level5/GiantFrog/Idle40x40.png"
+dest_files=["res://.godot/imported/Idle40x40.png-f28dcb979b0ee9310763eb6d04f26bde.ctex"]
 
 [params]
 

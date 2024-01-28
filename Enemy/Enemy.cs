@@ -4,13 +4,10 @@ using Godot;
 public partial class Enemy : CharacterBody2D
 {
 	private readonly float _kockbackRecovery = 3.5f;
-	private int _demage = 1;
 
 	private int _experience = 1;
 
 	private CharacterBody2D _hero;
-
-	private int _hp = 10;
 
 	private int _kockback;
 	private PackedScene _loot = GD.Load<PackedScene>("res://Objects/Gems/Gems.tscn");
@@ -18,12 +15,15 @@ public partial class Enemy : CharacterBody2D
 
 	private float _movementSpeed = 120.0f;
 	private Sprite2D _sprite;
+	public int Demage = 1;
+
+	public int Hp = 2;
 
 	public void OnHurtBoxHurt(int damage, int angle, int kockbackAmount)
 	{
-		_hp -= damage;
+		Hp -= damage;
 		_kockback = angle * kockbackAmount;
-		if (_hp <= 0) death();
+		if (Hp <= 0) death();
 	}
 
 
@@ -67,8 +67,9 @@ public partial class Enemy : CharacterBody2D
 		QueueFree();
 	}
 
-	private void _on_hurt_box_2_hurt(long damage, double angle, double kockbackAmount)
+	private void _on_hurt_box_2_hurt(int damage, int angle, int kockbackAmount)
 	{
-		death();
+		Hp -= 1;
+		if (Hp <= 0) death();
 	}
 }

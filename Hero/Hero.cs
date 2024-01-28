@@ -5,11 +5,14 @@ using Godot;
 public partial class Hero : CharacterBody2D
 {
 	public const int CollectedExperience = 0;
+	private Sprite2D _axeSprite;
 	private Label _coinsValue;
 
 	private Area2D _collecting;
 	private Area2D _gathering;
 	private TextureProgressBar _healthBar;
+
+	private int _kills;
 
 	private Sprite2D _sprite;
 	private int _time;
@@ -48,6 +51,7 @@ public partial class Hero : CharacterBody2D
 		_timeLabel = GetNode<Label>("GUILayer/GUI/TimeLabel");
 		_healthBar = GetNode<TextureProgressBar>("GUILayer/GUI/HealthBar");
 		_coinsValue = GetNode<Label>("GUILayer/GUI/CoinsLabel/CoinsValue");
+		_axeSprite = GetNode<Sprite2D>("Axe");
 
 		_gathering.Connect("area_entered", new Callable(this, nameof(OnGatheringAreaEntered)));
 		_collecting.Connect("area_entered", new Callable(this, nameof(OnCollectingAreaEntered)));
@@ -59,6 +63,8 @@ public partial class Hero : CharacterBody2D
 	{
 		_healthBar.MaxValue = HpMax;
 		_healthBar.Value = Hp;
+		_kills = 0;
+
 		CollectedGems = new Dictionary<string, int>
 		{
 			{ "red", 0 },
@@ -68,6 +74,12 @@ public partial class Hero : CharacterBody2D
 		LastMovement = Vector2.Up;
 
 		MovementSpeed = 240.0f;
+
+		// var tween = CreateTween();
+		// tween.TweenProperty(_axeSprite, "rotation", 10, 2);
+		// tween.TweenProperty(_axeSprite, "rotation", 45, 2);
+		// tween.Play();
+
 		GetTree().Paused = false;
 	}
 
