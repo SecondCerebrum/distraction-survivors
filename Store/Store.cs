@@ -87,8 +87,8 @@ public partial class Store : Control
 
 	private void _on_counters_update()
 	{
-		_coinsLbl.Text = "Coins: " + GameState.Coins.ToString("000");
-		_diamondsLbl.Text = "Diamonds: " + GameState.Diamonds.ToString("000");
+		_coinsLbl.Text = "Coins: " + GameState.Coins.ToString();
+		_diamondsLbl.Text = "Diamonds: " + GameState.Diamonds.ToString();
 	}
 
 	private void _on_terminal_window_input(InputEvent input)
