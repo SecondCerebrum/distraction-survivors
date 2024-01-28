@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 public partial class Hero : CharacterBody2D
@@ -13,6 +14,8 @@ public partial class Hero : CharacterBody2D
 	private TextureProgressBar _healthBar;
 
 	private int _kills;
+	private PackedScene _skillSelect;
+	private SkillSelect _skillSelectInstance;
 
 	private Sprite2D _sprite;
 	private int _time;
@@ -52,6 +55,7 @@ public partial class Hero : CharacterBody2D
 		_healthBar = GetNode<TextureProgressBar>("GUILayer/GUI/HealthBar");
 		_coinsValue = GetNode<Label>("GUILayer/GUI/CoinsLabel/CoinsValue");
 		_axeSprite = GetNode<Sprite2D>("Axe");
+		_skillSelect = GD.Load<PackedScene>("res://World/Components/SkillSelect.tscn");
 
 		_gathering.Connect("area_entered", new Callable(this, nameof(OnGatheringAreaEntered)));
 		_collecting.Connect("area_entered", new Callable(this, nameof(OnCollectingAreaEntered)));
@@ -115,6 +119,19 @@ public partial class Hero : CharacterBody2D
 				CollectedGems["red"] += 1;
 				_coinsValue.Text = $"{CollectedGems["red"]}";
 				GameState.Coins += 1;
+				var coinsCount = SkillList.Get().Count(skill => GameState.Coins >= skill.CoinsCost);
+				var canBuy = SkillList.Get().Count(skill => GameState.Coins >= skill.CoinsCost) > 0;
+
+				if (canBuy)
+				{
+					if (!HasNode("SkillSelectWindow"))
+					{
+						_skillSelectInstance = _skillSelect.Instantiate<SkillSelect>();
+						AddChild(_skillSelectInstance);
+					}
+
+					_skillSelectInstance.Show();
+				}
 			}
 		}
 	}

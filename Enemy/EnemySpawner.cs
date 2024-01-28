@@ -28,13 +28,11 @@ public partial class EnemySpawner : Node2D
         var packages = levels.Select(level =>
             {
                 var path = $"res://Enemy/Types/Level{level}/Level{level}.tscn";
-                GD.Print(path);
                 return GD.Load<PackedScene>(path);
             })
             .ToList();
         _spawns = packages.Select((package, index) =>
         {
-            GD.Print("spawnerIndex", index);
             var timestart = index > 1 ? 8 * index : 0;
             var timeend = index > 1 ? 8 * index + 15 : 15;
             var spawnDelay = 0;
@@ -49,28 +47,6 @@ public partial class EnemySpawner : Node2D
                 EnemySpawnDelay = spawnDelay
             };
         }).ToList();
-        // var _enemy1 = new SpawnInfo
-        // {
-        // 	Enemy = _level1,
-        // 	Level = 1,
-        // 	SpawnDelayCounter = 0,
-        // 	EnemyNum = 1,
-        // 	TimeStart = 0,
-        // 	TimeEnd = 10,
-        // 	EnemySpawnDelay = 0
-        // };
-        // var _enemy2 = new SpawnInfo
-        // {
-        // 	Enemy = _level2,
-        // 	Level = 2,
-        // 	SpawnDelayCounter = 0,
-        // 	EnemyNum = 1,
-        // 	TimeStart = 5,
-        // 	TimeEnd = 20,
-        // 	EnemySpawnDelay = 0
-        // };
-        // _spawns.Add(_enemy1);
-        // _spawns.Add(_enemy2);
         Run();
     }
 

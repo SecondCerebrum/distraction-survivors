@@ -78,7 +78,6 @@ public partial class RoundSummary : Window
 		counter.Start();
 		_countingSound.Play();
 		await ToSignal(this, SignalName.CoinsCountUpEnd);
-		GD.Print("count end");
 
 		if (!GameState.Bought.Contains(SkillItemName.CoinCollector))
 		{
@@ -101,13 +100,9 @@ public partial class RoundSummary : Window
 			};
 			counter.Start();
 			_countingSound.Play();
-		}
-		else
-		{
-			EmitSignal(SignalName.CoinsCountDownEnd);
+			await ToSignal(this, SignalName.CoinsCountDownEnd);
 		}
 
-		await ToSignal(this, SignalName.CoinsCountDownEnd);
 		await ToSignal(GetTree().CreateTimer(1f), SceneTreeTimer.SignalName.Timeout);
 
 		GetNode<Label>("DiamondsLbl").Show();
