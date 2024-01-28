@@ -27,5 +27,6 @@ public enum SkillItemName
     CautionGrindy,
     GreedyCape,
     Passat,
-    Placeholder
+    Placeholder,
+    Extinguisher,
 }

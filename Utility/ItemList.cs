@@ -34,7 +34,7 @@ public static class ItemList
 				DiamondsCost = 2
 			},
 			new StoreItemData {
-				ID = SkillItemName.Passat,
+				ID = SkillItemName.Placeholder,
 				Title = "Random placeholder",
 				Texture = "res://Images/items/placeholder.png",
 				Description = "It holds a space so it's more\nspacious out there",
@@ -48,18 +48,11 @@ public static class ItemList
 				DiamondsCost = 3
 			},
 			new StoreItemData {
-				ID = SkillItemName.Passat,
+				ID = SkillItemName.Extinguisher,
 				Title = "Fire Extinguisher",
 				Texture = "res://Images/items/extinguisher.jpg",
 				Description = "Ignites emotions but extinguishes candles.",
 				CoinsCost = 40
-			},
-			new StoreItemData {
-				ID = SkillItemName.Passat,
-				Title = "Fire Extinguisher",
-				Texture = "res://Images/items/extinguisher.jpg",
-				Description = "Ignites emotions but extinguishes candles.",
-				DiamondsCost = 4
 			},
 		};
 	}
