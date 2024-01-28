@@ -443,6 +443,5 @@ theme_override_font_sizes/font_size = 20
 text = "You don't have
 collector's skill"
 
-[connection signal="close_requested" from="." to="." method="_on_store"]
 [connection signal="pressed" from="NextRound" to="." method="_on_next_round"]
 [connection signal="pressed" from="Store" to="." method="_on_store"]
