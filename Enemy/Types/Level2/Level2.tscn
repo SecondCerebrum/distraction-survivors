@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://cqy66g6hd4gfc"]
+
+[ext_resource type="Script" path="res://Enemy/Enemy.cs" id="1_1yeiv"]
+[ext_resource type="Texture2D" uid="uid://dltr5pyq4gmgf" path="res://Enemy/Types/Level2/Reptile/Reptile.png" id="2_8se3h"]
+[ext_resource type="PackedScene" uid="uid://b5jfuwawmeb00" path="res://Utility/HitBox/HitBox.tscn" id="3_4hy0b"]
+[ext_resource type="PackedScene" uid="uid://brvoujg4dgmlt" path="res://Utility/HurtBox/HurtBox.tscn" id="4_1f1wl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hnkt5"]
+atlas = ExtResource("2_8se3h")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yayha"]
+size = Vector2(11, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i2m82"]
+size = Vector2(6, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvguh"]
+
+[node name="Level2" type="CharacterBody2D"]
+script = ExtResource("1_1yeiv")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_hnkt5")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_yayha")
+
+[node name="HitBox" parent="." instance=ExtResource("3_4hy0b")]
+visible = false
+collision_layer = 6
+collision_mask = 6
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(5, 0)
+shape = SubResource("RectangleShape2D_i2m82")
+
+[node name="HurtBox2" parent="." instance=ExtResource("4_1f1wl")]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="HurtBox2" index="0"]
+shape = SubResource("RectangleShape2D_cvguh")
+
+[connection signal="Hurt" from="HurtBox2" to="." method="_on_hurt_box_2_hurt"]
+
+[editable path="HitBox"]
+[editable path="HurtBox2"]

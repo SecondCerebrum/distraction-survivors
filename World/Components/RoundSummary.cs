@@ -1,29 +1,34 @@
 using Godot;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 public partial class RoundSummary : Window
 {
+	[Signal]
+	public delegate void CoinsCountDownEndEventHandler();
+
+	[Signal]
+	public delegate void CoinsCountUpEndEventHandler();
+
+	[Signal]
+	public delegate void DiamondsCountUpEndEventHandler();
+
+	[Signal]
+	public delegate void TimeCountUpEndEventHandler();
+
+	private AnimationPlayer _animationPlayer;
+	private Label _coinsCount;
+	private Label _coinsLbl;
+	private AudioStreamPlayer _countingSound;
+	private Label _diamondsCount;
+	private Button _nextRound;
+	private AudioStreamPlayer _punchSound;
+	private Button _store;
+	private Label _timeCount;
 	[Export] public int RoundCoins { get; set; } = 20;
 	[Export] public int RoundDiamonds { get; set; } = 2;
 	[Export] public int RoundTime { get; set; } = 40;
-	[Signal] public delegate void CoinsCountUpEndEventHandler();
-	[Signal] public delegate void CoinsCountDownEndEventHandler();
-	[Signal] public delegate void DiamondsCountUpEndEventHandler();
-	[Signal] public delegate void TimeCountUpEndEventHandler();
-	private AnimationPlayer _animationPlayer;
-	private AudioStreamPlayer _countingSound;
-	private AudioStreamPlayer _punchSound;
-	private Button _nextRound;
-	private Button _store;
-	private Label _coinsLbl;
-	private Label _coinsCount;
-	private Label _diamondsCount;
-	private Label _timeCount;
 
 	// Called when the node enters the scene tree for the first time.
-	public async override void _Ready()
+	public override async void _Ready()
 	{
 		_nextRound = GetNode<Button>("NextRound");
 		_store = GetNode<Button>("Store");
@@ -43,7 +48,6 @@ public partial class RoundSummary : Window
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-
 	}
 
 	public async void Run(int roundCoins, int roundDiamonds, int roundTime)
@@ -56,10 +60,11 @@ public partial class RoundSummary : Window
 		_coinsLbl.Show();
 		_coinsCount.Show();
 
-		var counter = new Timer() { WaitTime = 0.1 };
+		var counter = new Timer { WaitTime = 0.1 };
 		AddChild(counter);
-		int countingCoins = 0;
-		counter.Timeout += () => {
+		var countingCoins = 0;
+		counter.Timeout += () =>
+		{
 			_coinsCount.Text = countingCoins.ToString();
 			if (countingCoins == RoundCoins)
 			{
@@ -67,6 +72,7 @@ public partial class RoundSummary : Window
 				_countingSound.Stop();
 				EmitSignal(SignalName.CoinsCountUpEnd);
 			}
+
 			countingCoins++;
 		};
 		counter.Start();
@@ -79,9 +85,10 @@ public partial class RoundSummary : Window
 			GetNode<Label>("NoSkill").Show();
 			await ToSignal(GetTree().CreateTimer(1f), SceneTreeTimer.SignalName.Timeout);
 
-			counter = new Timer() { WaitTime = 0.05 };
+			counter = new Timer { WaitTime = 0.05 };
 			AddChild(counter);
-			counter.Timeout += () => {
+			counter.Timeout += () =>
+			{
 				_coinsCount.Text = countingCoins.ToString();
 				if (countingCoins == 0)
 				{
@@ -89,12 +96,16 @@ public partial class RoundSummary : Window
 					_countingSound.Stop();
 					EmitSignal(SignalName.CoinsCountDownEnd);
 				}
+
 				countingCoins--;
 			};
 			counter.Start();
 			_countingSound.Play();
 		}
-		else EmitSignal(SignalName.CoinsCountDownEnd);
+		else
+		{
+			EmitSignal(SignalName.CoinsCountDownEnd);
+		}
 
 		await ToSignal(this, SignalName.CoinsCountDownEnd);
 		await ToSignal(GetTree().CreateTimer(1f), SceneTreeTimer.SignalName.Timeout);
@@ -102,10 +113,11 @@ public partial class RoundSummary : Window
 		GetNode<Label>("DiamondsLbl").Show();
 		GetNode<Label>("DiamondsCount").Show();
 
-		counter = new Timer() { WaitTime = 0.1 };
+		counter = new Timer { WaitTime = 0.1 };
 		AddChild(counter);
-		int countingDiamonds = 0;
-		counter.Timeout += () => {
+		var countingDiamonds = 0;
+		counter.Timeout += () =>
+		{
 			_diamondsCount.Text = countingDiamonds.ToString();
 			if (countingDiamonds == RoundDiamonds)
 			{
@@ -113,6 +125,7 @@ public partial class RoundSummary : Window
 				_countingSound.Stop();
 				EmitSignal(SignalName.DiamondsCountUpEnd);
 			}
+
 			countingDiamonds++;
 		};
 		counter.Start();
@@ -124,10 +137,11 @@ public partial class RoundSummary : Window
 		GetNode<Label>("TimeLbl").Show();
 		GetNode<Label>("TimeCount").Show();
 
-		counter = new Timer() { WaitTime = 0.05 };
+		counter = new Timer { WaitTime = 0.05 };
 		AddChild(counter);
-		int countingTime = 0;
-		counter.Timeout += () => {
+		var countingTime = 0;
+		counter.Timeout += () =>
+		{
 			_timeCount.Text = countingTime.ToString();
 			if (countingTime == RoundTime)
 			{
@@ -135,6 +149,7 @@ public partial class RoundSummary : Window
 				_countingSound.Stop();
 				EmitSignal(SignalName.TimeCountUpEnd);
 			}
+
 			countingTime++;
 		};
 		counter.Start();
@@ -151,7 +166,10 @@ public partial class RoundSummary : Window
 
 	private void _on_next_round()
 	{
-		GetParent().RemoveChild(this);;
+		// GetTree().ReloadCurrentScene();
+		// GetParent().RemoveChild(this);
+		var level = "res://World/World.tscn";
+		var _level = GetTree().ChangeSceneToFile(level);
 	}
 
 	private void _on_store()

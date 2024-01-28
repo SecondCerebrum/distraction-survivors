@@ -7,9 +7,13 @@ public partial class EnemySpawner : Node2D
 	[Signal]
 	public delegate void ChangeTimeEventHandler(int time);
 
+	[Signal]
+	public delegate void GameOverEventHandler();
+
 	private readonly List<SpawnInfo> _spawns = new();
 	private CharacterBody2D _hero;
 	private int _time;
+	private int _timeLimit = 10;
 	private Timer _timer;
 
 	// Called when the node enters the scene tree for the first time.
@@ -17,26 +21,52 @@ public partial class EnemySpawner : Node2D
 	{
 		_hero = GetTree().Root.GetNode<CharacterBody2D>("World/Hero");
 		_timer = GetNode<Timer>("Timer");
-		_timer.Autostart = true;
 		_timer.Connect("timeout", new Callable(this, "onTimerTimeout"));
 		// Connect("ChangeTime", new Callable(_hero, "change_time"));
 		var _level1 = GD.Load<PackedScene>("res://Enemy/Types/Level1/Level1.tscn");
-		var sth = new SpawnInfo
+		var _level2 = GD.Load<PackedScene>("res://Enemy/Types/Level2/Level2.tscn");
+		var _enemy1 = new SpawnInfo
 		{
 			Enemy = _level1,
+			Level = 1,
 			SpawnDelayCounter = 0,
 			EnemyNum = 1,
 			TimeStart = 0,
 			TimeEnd = 10,
 			EnemySpawnDelay = 0
 		};
-		_spawns.Add(sth);
+		var _enemy2 = new SpawnInfo
+		{
+			Enemy = _level2,
+			Level = 2,
+			SpawnDelayCounter = 0,
+			EnemyNum = 1,
+			TimeStart = 5,
+			TimeEnd = 20,
+			EnemySpawnDelay = 0
+		};
+		_spawns.Add(_enemy1);
+		_spawns.Add(_enemy2);
+		Run();
+	}
+
+	public void Run()
+	{
+		_time = 0;
+		_timer.Start();
 	}
 
 	public void onTimerTimeout()
 	{
-		GD.Print("onTimerTimeout");
 		_time++;
+		var hasThisIsSparta = GameState.Bought.Contains(SkillItemName.ThisIsSparta);
+		if (_time > _timeLimit && !hasThisIsSparta)
+		{
+			EmitSignal(SignalName.GameOver);
+			_timer.Stop();
+			return;
+		}
+
 		var EnemySprawns = _spawns;
 		foreach (var Es in EnemySprawns)
 			if (_time > Es.TimeStart && _time < Es.TimeEnd)
@@ -53,6 +83,8 @@ public partial class EnemySpawner : Node2D
 					{
 						var EnemySpawn = Es.Enemy.Instantiate() as CharacterBody2D;
 						EnemySpawn.Position = GetRandomPosition();
+						var size = new Random().Next(1, Es.Level);
+						EnemySpawn.ApplyScale(new Vector2(size, size));
 						AddChild(EnemySpawn);
 						Counter++;
 					}

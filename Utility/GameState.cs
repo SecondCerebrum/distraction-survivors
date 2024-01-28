@@ -19,6 +19,7 @@ public enum SkillItemName
     BetterGrades,
     Stuffed,
     FrackingBlue,
+    ThisIsSparta,
 
     // Items
     Banhammer,

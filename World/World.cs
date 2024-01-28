@@ -5,6 +5,7 @@ public partial class World : Node2D
 {
 	private Achievement _achievement;
 	private CollectCoinsWindow _collectCoinsWindow;
+	private EnemySpawner _enemySpawner;
 	private Hero _hero;
 	private Random _random;
 	private Vector2 _viewportSize;
@@ -17,6 +18,13 @@ public partial class World : Node2D
 		_random = new Random();
 		_achievement = GetNode<Achievement>("Achievement");
 		_hero = GetNode<Hero>("Hero");
+		_enemySpawner = GetNode<EnemySpawner>("EnemySpawner");
+	}
+
+	public void RestartGame()
+	{
+		_hero.Run();
+		_enemySpawner.Run();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -56,10 +64,16 @@ public partial class World : Node2D
 
 	private void _on_round_summary()
 	{
+		OpenRoundSummary(20, 5, 60);
+	}
+
+	public void OpenRoundSummary(int roundCoins, int roundDiamonds, int roundTime)
+	{
+		GD.Print("roundCoins ", roundCoins, " roundDiamonds", roundDiamonds, " roundTime", roundTime);
 		var summary = GD.Load<PackedScene>("res://World/Components/RoundSummary.tscn");
 		var summaryInstance = summary.Instantiate<RoundSummary>();
 		AddChild(summaryInstance);
-		summaryInstance.Run(20, 5, 60);
+		summaryInstance.Run(roundCoins, roundDiamonds, roundTime);
 	}
 
 	private void _on_collect_popup()

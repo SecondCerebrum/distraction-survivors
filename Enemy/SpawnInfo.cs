@@ -9,4 +9,5 @@ public partial class SpawnInfo : Node
 	public int EnemySpawnDelay { get; set; }
 
 	public int SpawnDelayCounter { get; set; }
+	public int Level { get; set; }
 }

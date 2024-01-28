@@ -82,3 +82,4 @@ grow_vertical = 0
 [connection signal="pressed" from="VBoxContainer/Button4" to="." method="_on_collect_popup"]
 [connection signal="pressed" from="VBoxContainer/Button5" to="." method="_on_round_summary"]
 [connection signal="ChangeTime" from="EnemySpawner" to="Hero" method="_on_enemy_spawner_change_time"]
+[connection signal="GameOver" from="EnemySpawner" to="Hero" method="_on_enemy_spawner_game_over"]

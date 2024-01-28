@@ -12,6 +12,7 @@ public partial class Hero : CharacterBody2D
 	private TextureProgressBar _healthBar;
 
 	private Sprite2D _sprite;
+	private int _time;
 
 	private Label _timeLabel;
 
@@ -34,13 +35,9 @@ public partial class Hero : CharacterBody2D
 	public int Hp = 80;
 	public int HpMax = 80;
 
-	// private Area2D HurtBox;
 	public Vector2 LastMovement = Vector2.Up;
-	// [Signal]
-	// public delegate void HurtEventHandler();
 
 	public float MovementSpeed = 240.0f;
-	// deathPanel.visible = true
 
 	public override void _Ready()
 	{
@@ -51,20 +48,27 @@ public partial class Hero : CharacterBody2D
 		_timeLabel = GetNode<Label>("GUILayer/GUI/TimeLabel");
 		_healthBar = GetNode<TextureProgressBar>("GUILayer/GUI/HealthBar");
 		_coinsValue = GetNode<Label>("GUILayer/GUI/CoinsLabel/CoinsValue");
-		_healthBar.MaxValue = HpMax;
-		_healthBar.Value = Hp;
 
-
-		// Hurt
-		// var HurtBox = GetTree().Root.GetNode<Area2D>("World/Hero/HurtBox2");
-		// var HurtBox = GetNode<Area2D>("HurtBox2");
-		// GD.Print("HurtBox", " ", HurtBox);
-		// HurtBox.Set("Hurt", OnHurt);
-		// HurtBox.Connect("Hurt", new Callable(this, nameof(OnHurt)));
-		// GD.Print("Gathering ", Gathering, " ", Gathering.GetGroups());
 		_gathering.Connect("area_entered", new Callable(this, nameof(OnGatheringAreaEntered)));
 		_collecting.Connect("area_entered", new Callable(this, nameof(OnCollectingAreaEntered)));
-		// EnemySpawner.Connect("ChangeTime", new Callable(this, nameof(ChangeTime)));
+
+		Run();
+	}
+
+	public void Run()
+	{
+		_healthBar.MaxValue = HpMax;
+		_healthBar.Value = Hp;
+		CollectedGems = new Dictionary<string, int>
+		{
+			{ "red", 0 },
+			{ "green", 0 },
+			{ "blue", 0 }
+		};
+		LastMovement = Vector2.Up;
+
+		MovementSpeed = 240.0f;
+		GetTree().Paused = false;
 	}
 
 	private void OnGatheringAreaEntered(Node area)
@@ -79,7 +83,6 @@ public partial class Hero : CharacterBody2D
 
 	private void OnCollectingAreaEntered(Node area)
 	{
-		GD.Print("OnCollectingAreaEntered", " ", area, " ", area.IsInGroup("loot"), " ", area is Gems);
 		if (area.IsInGroup("loot"))
 		{
 			var isStuffed = GameState.Bought.Contains(SkillItemName.Stuffed);
@@ -136,11 +139,6 @@ public partial class Hero : CharacterBody2D
 		MoveAndSlide();
 	}
 
-	// public void OnHurt()
-	// {
-	// 	GD.Print("OnHurt");
-	// 	// EmitSignal("Hurt");
-	// }
 	private void _on_hurt_box_2_hurt(long damage, double angle, double kockbackAmount)
 	{
 		Hp -= Convert.ToInt32(Math.Clamp(damage - Armor, 1.0, 999.0));
@@ -151,24 +149,21 @@ public partial class Hero : CharacterBody2D
 
 	private void death()
 	{
-		EmitSignal("playerdeath");
-		GetTree().Paused = true;
+		DisplaySummaryPanel();
 	}
-	// var tween = deathPanel.create_tween()
-	// tween.tween_property(deathPanel,"position",Vector2(220,50),3.0).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
-	// tween.play()
-	// if time >= 300:
-	// lblResult.text = "You Win"
-	// sndVictory.play()
-	// else:
-	// lblResult.text = "You Lose"
-	// sndLose.play()
 
-	private void _on_enemy_spawner_change_time(long argtime)
+	private void DisplaySummaryPanel()
 	{
-		var time = argtime;
-		var get_m = Convert.ToInt32(time / 60.0);
-		var get_s = time % 60;
+		GetTree().Paused = true;
+		var world = GetTree().Root.GetNode("World") as World;
+		world.OpenRoundSummary(CollectedGems["red"], CollectedGems["blue"], _time);
+	}
+
+	private void _on_enemy_spawner_change_time(int argtime)
+	{
+		_time = argtime;
+		var get_m = Convert.ToInt32(_time / 60.0);
+		var get_s = _time % 60;
 		var min_str = $"{get_m}";
 		var sec_str = $"{get_s}";
 		if (get_m < 10)
@@ -176,5 +171,10 @@ public partial class Hero : CharacterBody2D
 		if (get_s < 10)
 			sec_str = $"0{get_s}";
 		_timeLabel.Text = $"{min_str}:{sec_str}";
+	}
+
+	private void _on_enemy_spawner_game_over()
+	{
+		DisplaySummaryPanel();
 	}
 }
