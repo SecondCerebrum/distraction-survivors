@@ -9,6 +9,7 @@ bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Theme" id="Theme_aa3p7"]
 TooltipLabel/font_sizes/font_size = 24
+TooltipLabel/fonts/font = ExtResource("2_3ecd1")
 TooltipPanel/styles/panel = SubResource("StyleBoxFlat_riypd")
 
 [node name="StoreItem" type="MarginContainer"]

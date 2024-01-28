@@ -22,8 +22,9 @@ public partial class Achievement : Control
 	{
 	}
 
-	public void Run(string title)
+	public void Run(string id, string title)
 	{
+		if (GameState.AchievementsShown.Contains(id) && !GameState.Bought.Contains(SkillItemName.GloriousAchievements)) return;
 		if (title is not null) _title.Text = title;
 		else _title.Text = AchievementTitle ?? "You found this placeholder";
 		_animationPlayer.Play("achievement");

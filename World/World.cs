@@ -9,12 +9,14 @@ public partial class World : Node2D
 	private Hero _hero;
 	private Random _random;
 	private SkillSelect _skillSelect;
+	private RoundSummary _roundSummary;
 	private Vector2 _viewportSize;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_skillSelect = GetNode<SkillSelect>("SkillSelectWindow");
+		_roundSummary = GetNode<RoundSummary>("RoundSummary");
 		_collectCoinsWindow = GetNode<CollectCoinsWindow>("CollectCoinsWindow");
 		_viewportSize = GetViewportRect().Size;
 		_random = new Random();
@@ -28,14 +30,11 @@ public partial class World : Node2D
 	{
 		_coinsLbl.Text = "Coins: " + GameState.Coins.ToString("000");
 
-		// GD.Print(_hero.Position);
-		if (!GameState.Achievements.Contains("bounds") && (
-				_hero.Position.X < -20 || _hero.Position.X > GetViewportRect().Size.X + 20 ||
-				_hero.Position.Y < -20 || _hero.Position.Y > GetViewportRect().Size.Y + 20
-			))
+		if (_hero.Position.X < -20 || _hero.Position.X > GetViewportRect().Size.X + 20 ||
+				_hero.Position.Y < -20 || _hero.Position.Y > GetViewportRect().Size.Y + 20)
 		{
-			GetNode<Achievement>("Achievement").Run("There are no bounds if you ask");
-			GameState.Achievements.Add("bounds");
+			GetNode<Achievement>("Achievement").Run("bounds", "There are no bounds if you ask");
+			GameState.AchievementsShown.Add("bounds");
 		}
 	}
 
@@ -58,6 +57,12 @@ public partial class World : Node2D
 	private void _on_skill_select()
 	{
 		_skillSelect.Show();
+	}
+
+	private void _on_round_summary()
+	{
+		_roundSummary.Show();
+		_roundSummary.Run();
 	}
 
 	private void _on_collect_popup()
