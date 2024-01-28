@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://thk1jb3rjtsx"
-path="res://.godot/imported/Faceset.png-c636481305031133282b0366f1a2a451.ctex"
+uid="uid://mt7uf7374i0s"
+path="res://.godot/imported/Charge.png-9e2d88fab438b610e148e377cebed18c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemy/Types/Level2/Octopus/Faceset.png"
-dest_files=["res://.godot/imported/Faceset.png-c636481305031133282b0366f1a2a451.ctex"]
+source_file="res://Enemy/Types/Level5/GiantFrog/Charge.png"
+dest_files=["res://.godot/imported/Charge.png-9e2d88fab438b610e148e377cebed18c.ctex"]
 
 [params]
 

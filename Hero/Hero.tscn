@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cl4awbg1m6xqj"]
+[gd_scene load_steps=18 format=3 uid="uid://cl4awbg1m6xqj"]
 
 [ext_resource type="Script" path="res://Hero/Hero.cs" id="1_naq11"]
 [ext_resource type="Texture2D" uid="uid://ngggwa84gr4x" path="res://Hero/Textures/Hero.png" id="2_x2mpn"]
@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://dwsf88cq5dfmu" path="res://Fonts/Rye-Regular.ttf" id="6_nx4nv"]
 [ext_resource type="Texture2D" uid="uid://bavbvr4fuxch5" path="res://Hero/Textures/HealthBar DARK.png" id="6_skjct"]
 [ext_resource type="PackedScene" uid="uid://closmn02nnoku" path="res://Objects/Gems/coin.tscn" id="8_ai4hr"]
+[ext_resource type="Texture2D" uid="uid://bmcpj65kpfc0m" path="res://Hero/Textures/Weapons/Sprite.png" id="9_2jsj5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iapq5"]
 atlas = ExtResource("2_x2mpn")
@@ -45,7 +46,6 @@ scale = Vector2(3, 3)
 texture = SubResource("AtlasTexture_iapq5")
 
 [node name="HeroCollisionShape" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0.289062, 5)
 shape = SubResource("RectangleShape2D_jbd0s")
 script = ExtResource("3_7n7ui")
@@ -55,7 +55,6 @@ wait_time = 0.2
 one_shot = true
 
 [node name="HurtBox2" parent="." instance=ExtResource("4_jei71")]
-visible = false
 position = Vector2(2, 2)
 collision_layer = 4
 collision_mask = 4
@@ -65,7 +64,6 @@ position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_k4vpl")
 
 [node name="HitBox" parent="." instance=ExtResource("5_jbbno")]
-visible = false
 collision_layer = 2
 collision_mask = 2
 
@@ -146,6 +144,13 @@ theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("6_nx4nv")
 theme_override_font_sizes/font_size = 23
 text = "000"
+
+[node name="Axe" type="Sprite2D" parent="."]
+position = Vector2(-16, 11)
+rotation = -0.181514
+scale = Vector2(3.22727, 3.03846)
+texture = ExtResource("9_2jsj5")
+offset = Vector2(0, -6)
 
 [connection signal="Hurt" from="HurtBox2" to="." method="_on_hurt_box_2_hurt"]
 
