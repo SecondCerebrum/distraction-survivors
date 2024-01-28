@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dulvdh5a4rh3g"]
+[gd_scene load_steps=4 format=3 uid="uid://dulvdh5a4rh3g"]
 
 [ext_resource type="Script" path="res://Objects/Gems/Gems.cs" id="1_45l46"]
+[ext_resource type="PackedScene" uid="uid://closmn02nnoku" path="res://Objects/Gems/coin.tscn" id="2_6gf0n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4tfp4"]
 
@@ -10,6 +11,9 @@ collision_mask = 8
 script = ExtResource("1_45l46")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+
+[node name="Coin" parent="." instance=ExtResource("2_6gf0n")]
+position = Vector2(-5.96046e-08, 5.96046e-08)
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_4tfp4")

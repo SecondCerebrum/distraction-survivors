@@ -4,7 +4,6 @@ using Godot;
 public partial class World : Node2D
 {
 	private Achievement _achievement;
-	private Label _coinsLbl;
 	private CollectCoinsWindow _collectCoinsWindow;
 	private Hero _hero;
 	private Random _random;
@@ -16,7 +15,6 @@ public partial class World : Node2D
 		_collectCoinsWindow = GetNode<CollectCoinsWindow>("CollectCoinsWindow");
 		_viewportSize = GetViewportRect().Size;
 		_random = new Random();
-		_coinsLbl = GetNode<Label>("CoinsLbl");
 		_achievement = GetNode<Achievement>("Achievement");
 		_hero = GetNode<Hero>("Hero");
 	}
@@ -24,10 +22,8 @@ public partial class World : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		_coinsLbl.Text = "Coins: " + GameState.Coins.ToString("000");
-
 		if (_hero.Position.X < -20 || _hero.Position.X > GetViewportRect().Size.X + 20 ||
-				_hero.Position.Y < -20 || _hero.Position.Y > GetViewportRect().Size.Y + 20)
+			_hero.Position.Y < -20 || _hero.Position.Y > GetViewportRect().Size.Y + 20)
 		{
 			GetNode<Achievement>("Achievement").Run("bounds", "There are no bounds if you ask");
 			GameState.AchievementsShown.Add("bounds");

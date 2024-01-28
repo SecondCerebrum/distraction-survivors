@@ -1,10 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://cl4awbg1m6xqj"]
+[gd_scene load_steps=17 format=3 uid="uid://cl4awbg1m6xqj"]
 
 [ext_resource type="Script" path="res://Hero/Hero.cs" id="1_naq11"]
 [ext_resource type="Texture2D" uid="uid://ngggwa84gr4x" path="res://Hero/Textures/Hero.png" id="2_x2mpn"]
 [ext_resource type="Script" path="res://Hero/HeroCollisionShape.cs" id="3_7n7ui"]
 [ext_resource type="PackedScene" uid="uid://brvoujg4dgmlt" path="res://Utility/HurtBox/HurtBox.tscn" id="4_jei71"]
 [ext_resource type="PackedScene" uid="uid://b5jfuwawmeb00" path="res://Utility/HitBox/HitBox.tscn" id="5_jbbno"]
+[ext_resource type="FontFile" uid="uid://dwsf88cq5dfmu" path="res://Fonts/Rye-Regular.ttf" id="6_nx4nv"]
+[ext_resource type="Texture2D" uid="uid://bavbvr4fuxch5" path="res://Hero/Textures/HealthBar DARK.png" id="6_skjct"]
+[ext_resource type="PackedScene" uid="uid://closmn02nnoku" path="res://Objects/Gems/coin.tscn" id="8_ai4hr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iapq5"]
 atlas = ExtResource("2_x2mpn")
@@ -24,6 +27,14 @@ radius = 126.77
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cg8le"]
 size = Vector2(66, 51)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncl78"]
+atlas = ExtResource("6_skjct")
+region = Rect2(16, 132, 62, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_foas6"]
+atlas = ExtResource("6_skjct")
+region = Rect2(17, 151, 60, 7)
 
 [node name="Hero" type="CharacterBody2D"]
 script = ExtResource("1_naq11")
@@ -78,7 +89,66 @@ collision_mask = 8
 position = Vector2(2, -0.5)
 shape = SubResource("RectangleShape2D_cg8le")
 
+[node name="GUILayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="Control" parent="GUILayer"]
+z_index = 15
+layout_mode = 3
+anchors_preset = 0
+offset_left = -1.0
+offset_top = -2.0
+offset_right = 999.0
+offset_bottom = 646.0
+mouse_filter = 1
+
+[node name="TimeLabel" type="Label" parent="GUILayer/GUI"]
+layout_mode = 0
+offset_left = 546.0
+offset_top = 6.0
+offset_right = 598.0
+offset_bottom = 29.0
+theme_override_fonts/font = ExtResource("6_nx4nv")
+text = "00:00"
+
+[node name="HealthBar" type="TextureProgressBar" parent="GUILayer/GUI"]
+layout_mode = 0
+offset_right = 62.0
+offset_bottom = 10.0
+scale = Vector2(3, 3)
+value = 50.0
+texture_over = SubResource("AtlasTexture_ncl78")
+texture_progress = SubResource("AtlasTexture_foas6")
+texture_progress_offset = Vector2(1, 1)
+
+[node name="CoinsLabel" type="Label" parent="GUILayer/GUI"]
+layout_mode = 0
+offset_left = 507.0
+offset_top = 32.0
+offset_right = 670.0
+offset_bottom = 75.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("6_nx4nv")
+theme_override_font_sizes/font_size = 23
+text = "Coins:"
+
+[node name="Coin" parent="GUILayer/GUI/CoinsLabel" instance=ExtResource("8_ai4hr")]
+position = Vector2(-21, 15)
+scale = Vector2(0.16, 0.16)
+
+[node name="CoinsValue" type="Label" parent="GUILayer/GUI/CoinsLabel"]
+layout_mode = 0
+offset_left = 80.0
+offset_right = 128.0
+offset_bottom = 30.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("6_nx4nv")
+theme_override_font_sizes/font_size = 23
+text = "000"
+
 [connection signal="Hurt" from="HurtBox2" to="." method="_on_hurt_box_2_hurt"]
 
 [editable path="HurtBox2"]
 [editable path="HitBox"]
+[editable path="GUILayer/GUI/CoinsLabel/Coin"]
