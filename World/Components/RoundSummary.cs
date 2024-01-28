@@ -60,7 +60,6 @@ public partial class RoundSummary : Window
 		AddChild(counter);
 		int countingCoins = 0;
 		counter.Timeout += () => {
-			countingCoins++;
 			_coinsCount.Text = countingCoins.ToString();
 			if (countingCoins == RoundCoins)
 			{
@@ -68,6 +67,7 @@ public partial class RoundSummary : Window
 				_countingSound.Stop();
 				EmitSignal(SignalName.CoinsCountUpEnd);
 			}
+			countingCoins++;
 		};
 		counter.Start();
 		_countingSound.Play();
@@ -82,7 +82,6 @@ public partial class RoundSummary : Window
 			counter = new Timer() { WaitTime = 0.05 };
 			AddChild(counter);
 			counter.Timeout += () => {
-				countingCoins--;
 				_coinsCount.Text = countingCoins.ToString();
 				if (countingCoins == 0)
 				{
@@ -90,6 +89,7 @@ public partial class RoundSummary : Window
 					_countingSound.Stop();
 					EmitSignal(SignalName.CoinsCountDownEnd);
 				}
+				countingCoins--;
 			};
 			counter.Start();
 			_countingSound.Play();
@@ -106,7 +106,6 @@ public partial class RoundSummary : Window
 		AddChild(counter);
 		int countingDiamonds = 0;
 		counter.Timeout += () => {
-			countingDiamonds++;
 			_diamondsCount.Text = countingDiamonds.ToString();
 			if (countingDiamonds == RoundDiamonds)
 			{
@@ -114,6 +113,7 @@ public partial class RoundSummary : Window
 				_countingSound.Stop();
 				EmitSignal(SignalName.DiamondsCountUpEnd);
 			}
+			countingDiamonds++;
 		};
 		counter.Start();
 		_countingSound.Play();
@@ -128,7 +128,6 @@ public partial class RoundSummary : Window
 		AddChild(counter);
 		int countingTime = 0;
 		counter.Timeout += () => {
-			countingTime++;
 			_timeCount.Text = countingTime.ToString();
 			if (countingTime == RoundTime)
 			{
@@ -136,6 +135,7 @@ public partial class RoundSummary : Window
 				_countingSound.Stop();
 				EmitSignal(SignalName.TimeCountUpEnd);
 			}
+			countingTime++;
 		};
 		counter.Start();
 		_countingSound.Play();
