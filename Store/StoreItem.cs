@@ -77,6 +77,8 @@ public partial class StoreItem : MarginContainer
 	{
 		if (Bought) _bought.Show();
 		else if (FreeCost || can_buy()) _buy.Show();
+
+		if (!Bought && !FreeCost) _cost.Show();
 	}
 
 	private void _on_hover_end()
